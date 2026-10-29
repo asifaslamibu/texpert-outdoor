@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texpert Outdoors | Hunting, Shooting, Camping &amp; Outdoor Gear</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-01.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="assets/images/favicon-03.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="assets/images/favicon-01.png">
+  <meta name="description" content="Hunting, shooting, camping and outdoor gear for every adventure. Shop deals on optics, knives, archery, gun cases and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Announcement -->
+  <div class="announce">
+    Up to 40% Off Hunting Gear &nbsp;·&nbsp; <a href="shop.html?cat=hunting-accessories">Shop Now</a>
+  </div>
+
+  <!-- Utility Bar -->
+  <div class="utility">
+    <div class="container utility-inner">
+      <a href="https://maps.google.com/?q=2990+Congressman+Ln,+Dallas,+TX+75220" class="store-pick" target="_blank" rel="noopener">
+        <i class="fa-solid fa-location-dot"></i>
+        <span><strong>Our Store:</strong> 2990 Congressman Ln, Dallas, TX 75220<br><small>Get Directions</small></span>
+      </a>
+      <ul class="utility-links">
+        <li class="utility-phone"><a href="tel:+12543580017"><i class="fa-solid fa-phone"></i> +1-254-358-0017</a></li>
+        <li><a href="shop.html">New Arrivals</a></li>
+        <li><a href="#deals">Deals</a></li>
+        <li><a href="shop.html?sort=price-asc">Clearance</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Texpert Outdoors" width="720" height="202"></a>
+
+      <form class="search" id="searchForm" role="search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" placeholder="Search products, brands and more..." aria-label="Search">
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="header-actions">
+        <a href="#" class="action"><i class="fa-regular fa-circle-user"></i><span>My<br>Account</span></a>
+        <a href="#" class="action"><i class="fa-regular fa-heart"></i><span>Wishlist</span><em class="badge" id="wishCount">0</em></a>
+        <a href="#" class="action"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span><em class="badge" id="cartCount">0</em></a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+      <div class="container nav-inner">
+        <button class="nav-close" id="navClose" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+        <ul class="nav-list" id="navList">
+          <li><a href="shop.html">Shop All</a></li>
+        </ul>
+        <div class="nav-more has-drop">
+          <button aria-label="More categories">More <i class="fa-solid fa-chevron-down"></i></button>
+          <ul class="dropdown dropdown-right" id="navMoreDrop"></ul>
+        </div>
+      </div>
+    </nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+  </header>
+
+  <!-- Offer Strip -->
+  <div class="offer-strip">
+    <div class="container offer-inner">
+      <a href="shop.html?cat=optics-and-sights">Shop 500+ Optics</a>
+      <a href="shop.html?cat=hunting-accessories">Additional 30% Off Camo Clearance</a>
+      <a href="shop.html?cat=optics-and-sights&sub=scopes">$15 Gift Card per $100 on Scopes</a>
+      <a href="shop.html?cat=hunting-accessories&sub=game-calls">10% Off Select Waterfowl Gear</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero Slider -->
+    <section class="hero" id="hero">
+      <div class="hero-slides">
+        <div class="hero-slide active" style="--bg: url('assets/images/banners/hero-hunting.jpg')">
+          <div class="container hero-content">
+            <p class="hero-eyebrow">Fall Hunting Event</p>
+            <h1>Up to 40% Off Hunting Gear</h1>
+            <p class="hero-text">Finish the season strong with deals on optics, calls, blinds and more.</p>
+            <div class="hero-actions">
+              <a href="shop.html?cat=hunting-accessories" class="btn btn-light">Shop Hunting</a>
+              <a href="shop.html?cat=optics-and-sights" class="btn btn-ghost">Shop Optics</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slide" style="--bg: url('assets/images/banners/hero-camping.jpg')">
+          <div class="container hero-content">
+            <p class="hero-eyebrow">Camp Season</p>
+            <h1>Gear Up for a Night Outside</h1>
+            <p class="hero-text">Packs, fire starters, first aid and everything else you need under the stars.</p>
+            <div class="hero-actions">
+              <a href="shop.html?cat=outdoor-gear" class="btn btn-light">Shop Camping</a>
+              <a href="categories.html" class="btn btn-ghost">All Categories</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slide" style="--bg: url('assets/images/banners/hero-hikers.jpg')">
+          <div class="container hero-content">
+            <p class="hero-eyebrow">New Season Knives</p>
+            <h1>Built for the Backcountry</h1>
+            <p class="hero-text">Folding knives, field dressing kits and multi-tools that go the distance.</p>
+            <div class="hero-actions">
+              <a href="shop.html?cat=knives-and-multi-tools" class="btn btn-light">Shop Knives</a>
+              <a href="shop.html?cat=outdoor-gear" class="btn btn-ghost">Outdoor Gear</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="hero-arrow prev" id="heroPrev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="hero-arrow next" id="heroNext" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="hero-dots" id="heroDots"></div>
+    </section>
+
+    <!-- Trust Bar -->
+    <div class="trust">
+      <div class="container trust-grid">
+        <p><i class="fa-solid fa-truck-fast"></i> <strong>Free shipping</strong> on orders $75+</p>
+        <p><i class="fa-solid fa-store"></i> <strong>Buy online,</strong> pick up in store</p>
+        <p><i class="fa-solid fa-rotate-left"></i> <strong>60-day</strong> easy returns</p>
+        <p><i class="fa-solid fa-award"></i> <strong>Earn points</strong> with Trail Rewards</p>
+      </div>
+    </div>
+
+    <!-- Shop by Category -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Shop by Category</h2>
+          <a href="categories.html" class="view-all">View All</a>
+        </div>
+        <div class="cat-row" id="catRow"></div>
+      </div>
+    </section>
+
+    <!-- Editorial Promos -->
+    <section class="section section-flush" id="deals">
+      <div class="container promo-grid">
+        <a href="shop.html?cat=optics-and-sights" class="promo">
+          <div class="promo-img" style="--bg: url('assets/images/banners/promo-shooting.jpg')"><span class="promo-tag">Up to 20% Off</span></div>
+          <h3>The October Shooting Sale</h3>
+          <p>Select optics, red dots and shooting accessories from top brands.</p>
+          <span class="link-arrow">Shop the Sale</span>
+        </a>
+        <a href="shop.html?cat=knives-and-multi-tools" class="promo">
+          <div class="promo-img" style="--bg: url('assets/images/banners/promo-knives.jpg')"><span class="promo-tag">Blade Days</span></div>
+          <h3>10% Off Knives &amp; Multi-Tools</h3>
+          <p>Folding knives, fixed blades and game processing kits.</p>
+          <span class="link-arrow">Shop Knives</span>
+        </a>
+        <a href="shop.html?cat=hunting-accessories" class="promo">
+          <div class="promo-img" style="--bg: url('assets/images/banners/essentials-lake.jpg')"><span class="promo-tag">New Arrivals</span></div>
+          <h3>Hunting Essentials</h3>
+          <p>Calls, blinds, scent control and trail cameras for the season ahead.</p>
+          <span class="link-arrow">Shop Essentials</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Hot Buys -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Hot Buys</h2>
+          <a href="shop.html" class="view-all">Shop All Deals</a>
+        </div>
+        <div class="scroller-wrap">
+          <button class="scroll-btn prev" data-target="hotBuys" aria-label="Scroll left"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="scroller" id="hotBuys"></div>
+          <button class="scroll-btn next" data-target="hotBuys" aria-label="Scroll right"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section class="section section-flush">
+      <div class="container">
+        <div class="split-banner">
+          <div class="split-img" style="--bg: url('assets/images/banners/story-campfire.jpg')"></div>
+          <div class="split-text">
+            <p class="kicker">Hunting Story Contest</p>
+            <h2>Share Your Story.<br>You Could Win $4,000.</h2>
+            <p>Send us a favorite hunting photo and the story behind it for the chance to win $4,000 in Texpert Outdoors gift cards.</p>
+            <a href="#" class="btn btn-primary">Enter Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hunting Essentials Grid -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Hunting Essentials</h2>
+          <a href="shop.html?cat=hunting-accessories" class="view-all">Shop All Hunting</a>
+        </div>
+        <div class="product-grid" id="essentials"></div>
+      </div>
+    </section>
+
+    <!-- Weekly Features -->
+    <section class="section section-flush">
+      <div class="container features-2">
+        <a href="shop.html?cat=archery" class="feature-card" style="--bg: url('assets/images/banners/feature-forest.jpg')">
+          <h3>Shop by Pursuit</h3>
+          <p>Bows, broadheads and the gear for the species you're chasing.</p>
+          <span class="link-arrow">Shop Archery</span>
+        </a>
+        <a href="shop.html?cat=outdoor-gear" class="feature-card" style="--bg: url('assets/images/banners/feature-fishing.jpg')">
+          <h3>Fall Bite Is On</h3>
+          <p>Dry boxes, packs and outdoor gear for long days on the water.</p>
+          <span class="link-arrow">Shop Outdoor Gear</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Camp to Table -->
+    <section class="section">
+      <div class="container">
+        <a href="shop.html?cat=knives-and-multi-tools&sub=knife-accessories" class="wide-banner" style="--bg: url('assets/images/banners/camp-to-table.jpg')">
+          <div>
+            <p class="kicker">Field to Table</p>
+            <h2>From Camp to Table</h2>
+            <p>Game processing kits, knives and gear to clean, cook and enjoy your harvest.</p>
+            <span class="btn btn-primary">Shop Processing</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Rewards -->
+    <section class="rewards">
+      <div class="container rewards-inner">
+        <div>
+          <p class="kicker">Trail Rewards</p>
+          <h2>Members Save 5% on Ammo &amp; Pellets</h2>
+          <p>Earn points on every purchase and get members-only pricing. Free to join.</p>
+        </div>
+        <div class="rewards-actions">
+          <a href="#" class="btn btn-light">Join Free</a>
+          <a href="#" class="btn btn-ghost">Sign In</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer footer-big">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Track an Order</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Shipping Information</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Product Recalls</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Stores</h4>
+        <ul>
+          <li><a href="#">Store Locator</a></li>
+          <li><a href="#">Fishing Reports</a></li>
+          <li><a href="#">Classes &amp; Events</a></li>
+          <li><a href="#">How-To Video Library</a></li>
+          <li><a href="#">Buy Online, Pick Up</a></li>
+          <li><a href="#">Accessory Finder</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Trail Rewards Program</a></li>
+          <li><a href="#">Become an Affiliate</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact Us</h4>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i><a href="https://maps.google.com/?q=2990+Congressman+Ln,+Dallas,+TX+75220" target="_blank" rel="noopener">2990 Congressman Ln<br>Dallas, TX 75220</a></li>
+          <li><i class="fa-solid fa-phone"></i><a href="tel:+12543580017">+1-254-358-0017</a></li>
+          <li><i class="fa-solid fa-headset"></i><span>Toll-Free <a href="tel:9454279519">(945) 427-9519</a></span></li>
+          <li><i class="fa-solid fa-envelope"></i><a href="mailto:sales@texpertoutdoors.com">sales@texpertoutdoors.com</a></li>
+          <li><i class="fa-regular fa-clock"></i><span>Mon–Fri, 9am–6pm EST</span></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-signup">
+        <h4>Get special offers delivered right to your inbox.</h4>
+        <form class="signup" id="signupForm">
+          <input type="email" placeholder="Enter your email" aria-label="Email" required>
+          <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-chevron-right"></i></button>
+        </form>
+        <h4>Get 10% off your next order!</h4>
+        <form class="signup" id="smsForm">
+          <input type="tel" placeholder="Enter your mobile phone number" aria-label="Phone" required>
+          <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-chevron-right"></i></button>
+        </form>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <a href="index.html" class="logo logo-light"><img src="assets/images/logo-white.png" alt="Texpert Outdoors" width="720" height="202"></a>
+      <p>&copy; <span id="year">2026</span> Texpert Outdoors. All rights reserved. &nbsp;|&nbsp; <a href="#">Terms &amp; Conditions</a> &nbsp;|&nbsp; <a href="#">Accessibility</a> &nbsp;|&nbsp; <a href="#">Sitemap</a></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>
