@@ -126,12 +126,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .hero { position: relative; height: 600px; overflow: hidden; background: var(--black); color: var(--white); }
 .hero-slides, .hero-slide { position: absolute; inset: 0; }
 .hero-slide {
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .35) 40%, rgba(0, 0, 0, 0) 70%), var(--bg), linear-gradient(135deg, #3b4a2a, #1c2614);
+  background-image: var(--bg), linear-gradient(135deg, #3b4a2a, #1c2614);
   background-size: cover; background-position: center;
   opacity: 0; visibility: hidden; transition: opacity .9s ease, visibility .9s;
 }
 .hero-slide.active { opacity: 1; visibility: visible; }
-.hero-content { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+.hero-content { height: 100%; display: flex; flex-direction: column; justify-content: center; text-shadow: 0 2px 12px rgba(0, 0, 0, .45); }
 .hero-content > * { max-width: 600px; }
 .hero-eyebrow { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
 .hero h1 { font-family: var(--font-head); font-size: 84px; line-height: .95; font-weight: 700; text-transform: uppercase; margin-bottom: 18px; }
@@ -145,14 +145,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .hero-arrow {
   position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
-  width: 44px; height: 64px; color: var(--white); font-size: 22px; opacity: .75;
-  display: grid; place-items: center; transition: opacity .2s;
+  width: 44px; height: 64px; background: rgba(0, 0, 0, .3); color: var(--white); font-size: 20px;
+  display: grid; place-items: center; transition: background .2s;
 }
-.hero-arrow:hover { opacity: 1; }
+.hero-arrow:hover { background: rgba(0, 0, 0, .6); }
 .hero-arrow.prev { left: 10px; }
 .hero-arrow.next { right: 10px; }
 .hero-dots { position: absolute; bottom: 28px; left: max(24px, calc((100% - var(--container)) / 2 + 24px)); display: flex; gap: 6px; z-index: 2; }
-.hero-dots button { width: 30px; height: 3px; background: rgba(255, 255, 255, .4); transition: background .3s; }
+.hero-dots button { width: 30px; height: 3px; background: rgba(255, 255, 255, .55); box-shadow: 0 0 4px rgba(0, 0, 0, .35); transition: background .3s; }
 .hero-dots button.active { background: var(--white); }
 
 /* ===== Trust bar ===== */
@@ -425,7 +425,6 @@ main > .section:last-of-type { padding-bottom: 56px; }
   .offer-inner { grid-template-columns: 1fr; }
   .offer-inner a:nth-child(n+2) { display: none; }
   .hero { height: 540px; }
-  .hero-slide { background-image: linear-gradient(0deg, rgba(0, 0, 0, .78) 0%, rgba(0, 0, 0, .2) 70%), var(--bg), linear-gradient(135deg, #3b4a2a, #1c2614); }
   .hero-content { justify-content: flex-end; padding-bottom: 70px; }
   .hero h1 { font-size: 46px; }
   .hero-text { font-size: 15px; margin-bottom: 22px; }
