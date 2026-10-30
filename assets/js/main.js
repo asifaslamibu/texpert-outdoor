@@ -123,6 +123,10 @@ document.addEventListener('click', e => {
 updateCounts();
 
 // ===== Navigation (built from categories) =====
+// Only categories / subcategories that have products are shown in menus
+const stocked = categories.filter(c => c.count);
+const stockedSubs = c => c.subs.filter(s => s.count);
+
 const NAV_VISIBLE = 8;
 const navList = $('#navList');
 if (navList) {
@@ -133,18 +137,19 @@ if (navList) {
     if (a.getAttribute('href') === page && !activeCat) a.classList.add('active');
   });
 
-  navList.insertAdjacentHTML('beforeend', categories.map((c, i) => `
+  navList.insertAdjacentHTML('beforeend', stocked.map((c, i) => `
     <li class="has-drop${i >= NAV_VISIBLE ? ' nav-extra' : ''}">
       <a href="${shopUrl(c.slug)}"${c.slug === activeCat ? ' class="active"' : ''}>${c.short} <i class="fa-solid fa-chevron-down"></i></a>
       <ul class="dropdown">
-        ${c.subs.map(s => `<li><a href="${shopUrl(c.slug, s.slug)}">${s.name}</a></li>`).join('')}
+        ${stockedSubs(c).map(s => `<li><a href="${shopUrl(c.slug, s.slug)}">${s.name}</a></li>`).join('')}
         <li class="drop-all"><a href="${shopUrl(c.slug)}">Shop all ${c.short} <i class="fa-solid fa-arrow-right"></i></a></li>
       </ul>
     </li>`).join(''));
 
   const moreDrop = $('#navMoreDrop');
   if (moreDrop) {
-    moreDrop.innerHTML = categories.slice(NAV_VISIBLE)
+    moreDrop.closest('.nav-more').hidden = stocked.length <= NAV_VISIBLE;
+    moreDrop.innerHTML = stocked.slice(NAV_VISIBLE)
       .map(c => `<li><a href="${shopUrl(c.slug)}">${c.name}</a></li>`).join('')
       + '<li class="drop-all"><a href="categories.html">All Categories <i class="fa-solid fa-arrow-right"></i></a></li>';
   }
@@ -182,13 +187,22 @@ $('#searchForm').addEventListener('submit', e => {
 // ===== Category directory (categories.html) =====
 const directory = $('#catDirectory');
 if (directory) {
-  directory.innerHTML = categories.map(c => `
+  directory.innerHTML = stocked.map(c => `
     <div class="dir-col">
       <h3><a href="${shopUrl(c.slug)}">${c.name}</a></h3>
-      <ul>${c.subs.map(s => `<li><a href="${shopUrl(c.slug, s.slug)}">${s.name} <span>(${s.count})</span></a></li>`).join('')}</ul>
+      <ul>${stockedSubs(c).map(s => `<li><a href="${shopUrl(c.slug, s.slug)}">${s.name} <span>(${s.count})</span></a></li>`).join('')}</ul>
     </div>`).join('');
-  $$('.dir-count').forEach(el => { el.textContent = categories.length; });
+  $$('.dir-count').forEach(el => { el.textContent = stocked.length; });
 }
+
+// ===== Footer sign-up forms =====
+['#signupForm', '#smsForm'].forEach(sel => {
+  $(sel)?.addEventListener('submit', e => {
+    e.preventDefault();
+    e.target.reset();
+    showToast('Thanks for signing up!');
+  });
+});
 
 // ===== Footer year =====
 $('#year').textContent = new Date().getFullYear();

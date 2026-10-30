@@ -2,11 +2,6 @@
 
 const product = productById(+new URLSearchParams(location.search).get('id'));
 
-// Multi-word brands in the catalog; anything else uses the first word of the name
-const BRANDS = ['Trophy Ridge', 'Carbon Express', 'Outdoor Edge', 'Butler Creek', 'Quaker Boy', 'Knight & Hale',
-  'Scent Thief', 'Scent-A-Way', 'Wildlife Research', 'Stealth Cam', 'Adventure Medical', 'Primos Double Bull'];
-const brandOf = name => (BRANDS.find(b => name.startsWith(b)) || name.split(' ')[0]).replace(/'s$/, '');
-
 // Short category-specific copy for the description tab
 const ABOUT = {
   'archery': 'Engineered for consistent, accurate shots and built to hold up season after season in the stand or on the range.',
@@ -25,7 +20,7 @@ if (!product) {
   document.title = 'Product Not Found | Texpert Outdoors';
 } else {
   const p = product;
-  const brand = brandOf(p.name);
+  const brand = p.brand;
   const sku = `TXO-${String(p.id).padStart(5, '0')}`;
   document.title = `${p.name} | Texpert Outdoors`;
 

@@ -81,12 +81,3 @@ $('#hero').addEventListener('touchend', e => {
 
 goTo(0);
 restart();
-
-// ===== Footer sign-up forms =====
-['#signupForm', '#smsForm'].forEach(sel => {
-  $(sel).addEventListener('submit', e => {
-    e.preventDefault();
-    e.target.reset();
-    showToast('Thanks for signing up!');
-  });
-});

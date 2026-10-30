@@ -218,6 +218,11 @@ const catalog = [
 
 const slugify = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+// Multi-word brands in the catalog; anything else uses the first word of the name
+const BRANDS = ['Trophy Ridge', 'Carbon Express', 'Outdoor Edge', 'Butler Creek', 'Quaker Boy', 'Knight & Hale',
+  'Scent Thief', 'Scent-A-Way', 'Wildlife Research', 'Stealth Cam', 'Adventure Medical'];
+const brandOf = name => (BRANDS.find(b => name.startsWith(b)) || name.split(' ')[0]).replace(/'s$/, '');
+
 // Flatten into categories + products
 const products = [];
 const categories = catalog.map(cat => {
@@ -227,7 +232,7 @@ const categories = catalog.map(cat => {
       const pSlug = slugify(name);
       products.push({
         id: products.length + 1,
-        name, slug: pSlug, price, rating, reviews,
+        name, slug: pSlug, brand: brandOf(name), price, rating, reviews,
         oldPrice: oldPrice || null,
         tag: oldPrice ? 'Sale' : (isNew ? 'New' : ''),
         img: IMG[imgKey] || `assets/images/products/${pSlug}.jpg`,

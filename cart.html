@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | Texpert Outdoors</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-01.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="assets/images/favicon-03.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="assets/images/favicon-01.png">
+  <meta name="description" content="Review the items in your Texpert Outdoors cart.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261030c">
+</head>
+<body>
+
+  <!-- Announcement -->
+  <div class="announce">
+    Up to 40% Off Hunting Gear &nbsp;·&nbsp; <a href="shop.html?cat=hunting-accessories">Shop Now</a>
+  </div>
+
+  <!-- Utility Bar -->
+  <div class="utility">
+    <div class="container utility-inner">
+      <a href="https://maps.google.com/?q=2990+Congressman+Ln,+Dallas,+TX+75220" class="store-pick" target="_blank" rel="noopener">
+        <i class="fa-solid fa-location-dot"></i>
+        <span><strong>Our Store:</strong> 2990 Congressman Ln, Dallas, TX 75220<br><small>Get Directions</small></span>
+      </a>
+      <ul class="utility-links">
+        <li class="utility-phone"><a href="tel:+12543580017"><i class="fa-solid fa-phone"></i> +1-254-358-0017</a></li>
+        <li><a href="shop.html">New Arrivals</a></li>
+        <li><a href="index.html#deals">Deals</a></li>
+        <li><a href="shop.html?sort=price-asc">Clearance</a></li>
+        <li><a href="contact.html">Help</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Texpert Outdoors" width="720" height="202"></a>
+
+      <form class="search" id="searchForm" role="search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" placeholder="Search products, brands and more..." aria-label="Search">
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="header-actions">
+        <a href="track-order.html" class="action"><i class="fa-solid fa-box"></i><span>Track<br>Order</span></a>
+        <a href="wishlist.html" class="action"><i class="fa-regular fa-heart"></i><span>Wishlist</span><em class="badge" id="wishCount">0</em></a>
+        <a href="cart.html" class="action"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span><em class="badge" id="cartCount">0</em></a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+      <div class="container nav-inner">
+        <button class="nav-close" id="navClose" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+        <ul class="nav-list" id="navList">
+          <li><a href="shop.html">Shop All</a></li>
+        </ul>
+        <div class="nav-more has-drop">
+          <button aria-label="More categories">More <i class="fa-solid fa-chevron-down"></i></button>
+          <ul class="dropdown dropdown-right" id="navMoreDrop"></ul>
+        </div>
+      </div>
+    </nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+  </header>
+
+  <!-- Offer Strip -->
+  <div class="offer-strip">
+    <div class="container offer-inner">
+      <a href="shop.html?cat=optics-and-sights">Shop 500+ Optics</a>
+      <a href="shop.html?cat=hunting-accessories">Additional 30% Off Camo Clearance</a>
+      <a href="shop.html?cat=optics-and-sights&sub=scopes">$15 Gift Card per $100 on Scopes</a>
+      <a href="shop.html?cat=hunting-accessories&sub=game-calls">10% Off Select Waterfowl Gear</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-banner">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><span>Cart</span></nav>
+        <h1>Shopping Cart</h1>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container cart-layout" id="cartPage">
+        <div class="cart-items" id="cartItems"></div>
+        <aside class="summary" id="cartSummary"></aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer footer-big">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="track-order.html">Track an Order</a></li>
+          <li><a href="shipping.html">Shipping Information</a></li>
+          <li><a href="returns.html">Returns &amp; Exchanges</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="shop.html">Shop All</a></li>
+          <li><a href="categories.html">All Categories</a></li>
+          <li><a href="index.html#deals">Hot Deals</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html#store">Visit Our Store</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact Us</h4>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i><a href="https://maps.google.com/?q=2990+Congressman+Ln,+Dallas,+TX+75220" target="_blank" rel="noopener">2990 Congressman Ln<br>Dallas, TX 75220</a></li>
+          <li><i class="fa-solid fa-phone"></i><a href="tel:+12543580017">+1-254-358-0017</a></li>
+          <li><i class="fa-solid fa-headset"></i><span>Toll-Free <a href="tel:9454279519">(945) 427-9519</a></span></li>
+          <li><i class="fa-solid fa-envelope"></i><a href="mailto:sales@texpertoutdoors.com">sales@texpertoutdoors.com</a></li>
+          <li><i class="fa-regular fa-clock"></i><span>Mon–Fri, 9am–6pm EST</span></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-signup">
+        <h4>Get special offers delivered right to your inbox.</h4>
+        <form class="signup" id="signupForm">
+          <input type="email" placeholder="Enter your email" aria-label="Email" required>
+          <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-chevron-right"></i></button>
+        </form>
+        <h4>Get 10% off your next order!</h4>
+        <form class="signup" id="smsForm">
+          <input type="tel" placeholder="Enter your mobile phone number" aria-label="Phone" required>
+          <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-chevron-right"></i></button>
+        </form>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <a href="index.html" class="logo logo-light"><img src="assets/images/logo-white.png" alt="Texpert Outdoors" width="720" height="202"></a>
+      <p>&copy; <span id="year">2026</span> Texpert Outdoors. All rights reserved. &nbsp;|&nbsp; <a href="terms.html">Terms &amp; Conditions</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="contact.html">Contact</a></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/data.js?v=20261030c"></script>
+  <script src="assets/js/main.js?v=20261030c"></script>
+  <script src="assets/js/pages.js?v=20261030c"></script>
+</body>
+</html>
