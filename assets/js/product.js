@@ -118,11 +118,14 @@ if (!product) {
     $('.pdp-details').scrollIntoView({ behavior: 'smooth' });
   });
 
-  // ===== Related: same subcategory first, then same category =====
-  const related = products
+  // ===== Related: same subcategory, then same category, topped up with top-rated picks =====
+  const sameCat = products
     .filter(r => r.id !== p.id && r.category === p.category)
-    .sort((a, b) => (b.sub === p.sub) - (a.sub === p.sub))
-    .slice(0, 4);
+    .sort((a, b) => (b.sub === p.sub) - (a.sub === p.sub));
+  const topUp = products
+    .filter(r => r.id !== p.id && r.category !== p.category)
+    .sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
+  const related = [...sameCat, ...topUp].slice(0, 4);
   $('#related').innerHTML = related.map(productCard).join('');
   $('#relatedAll').href = shopUrl(p.category);
   $('#relatedAll').textContent = `Shop All ${p.categoryName}`;

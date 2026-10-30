@@ -165,7 +165,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .section { padding: 56px 0 0; }
 .section-sm { padding: 22px 0; }
 .section-flush { padding-top: 56px; }
-main > .section:last-of-type { padding-bottom: 56px; }
+main > .section:last-of-type { padding-bottom: 72px; }
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 22px; }
 .section-title { font-family: var(--font-head); font-size: 40px; font-weight: 700; line-height: 1; text-transform: uppercase; }
 .center-title { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 16px; }
@@ -406,6 +406,7 @@ main > .section:last-of-type { padding-bottom: 56px; }
 .review-summary > strong { font-family: var(--font-head); font-size: 64px; line-height: 1; }
 .review-summary .rating { font-size: 17px; }
 .review-summary span { font-size: 14px; color: var(--muted); }
+.pdp-missing { padding-bottom: 72px; }
 .pdp-missing p { margin: 12px 0 22px; color: var(--muted); }
 
 /* ===== Toast ===== */
