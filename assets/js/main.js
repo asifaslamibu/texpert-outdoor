@@ -5,6 +5,7 @@ const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 const money = n => `$${n.toFixed(2)}`;
 const shopUrl = (cat, sub) => `shop.html?cat=${cat}${sub ? `&sub=${sub}` : ''}`;
+const productUrl = p => `product.html?id=${p.id}`;
 
 function imgWithFallback(src, alt, icon) {
   return `<img src="${src}" alt="${alt}" loading="lazy" data-icon="${icon}">`;
@@ -40,9 +41,9 @@ function productCard(p) {
     <div class="product">
       ${p.tag ? `<span class="product-tag ${p.tag === 'Sale' ? 'tag-sale' : ''}">${p.tag}</span>` : ''}
       <button class="product-wish${inWish ? ' active' : ''}" data-id="${p.id}" aria-label="Add to wishlist"><i class="fa-${inWish ? 'solid' : 'regular'} fa-heart"></i></button>
-      <div class="product-img">${imgWithFallback(p.img, p.name, p.icon)}</div>
+      <a href="${productUrl(p)}" class="product-img">${imgWithFallback(p.img, p.name, p.icon)}</a>
       <div class="rating">${stars(p.rating)}<small>(${p.reviews})</small></div>
-      <h3>${p.name}</h3>
+      <h3><a href="${productUrl(p)}">${p.name}</a></h3>
       <div class="price">
         <strong class="${p.oldPrice ? 'is-sale' : ''}">${money(p.price)}</strong>
         ${p.oldPrice ? `<del>${money(p.oldPrice)}</del>` : ''}

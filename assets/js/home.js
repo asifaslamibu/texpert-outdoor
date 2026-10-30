@@ -1,7 +1,7 @@
 // ===== Homepage sections — requires data.js + main.js =====
 
 const discount = p => Math.round((1 - p.price / p.oldPrice) * 100);
-const productLink = p => shopUrl(p.category, p.sub);
+const productLink = productUrl;
 const hideSection = el => { el.closest('section').hidden = true; };
 
 // ===== Category row: stocked categories, cover = priciest product in each =====
