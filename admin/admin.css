@@ -167,3 +167,15 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
   .sub-list { margin-left: 8px; }
   .sub-list input { min-width: 0; }
 }
+
+/* ----- bulk actions & danger zone ----- */
+.bulk-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+.bulk-bar span { margin-right: auto; font-size: 13px; }
+.bulk-bar select { width: auto; margin: 0; padding: 6px 10px; }
+.table .sel { width: 36px; padding-right: 0; }
+.table .sel input { width: 16px; height: 16px; accent-color: var(--green-700); vertical-align: middle; }
+.danger-zone { border-color: #f0c9c5; }
+.danger-zone h2 { color: var(--red); margin-bottom: 6px; }
+.danger-zone p { margin-bottom: 14px; }
+.danger-btn { background: var(--red); border-color: var(--red); }
+.danger-btn:hover { background: #8f271f; border-color: #8f271f; }

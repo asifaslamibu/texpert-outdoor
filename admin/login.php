@@ -32,7 +32,7 @@ if (is_post()) {
   <meta name="robots" content="noindex, nofollow">
   <title>Sign In | Texpert Admin</title>
   <link rel="icon" type="image/png" href="../assets/images/favicon-01.png">
-  <link rel="stylesheet" href="admin.css?v=2">
+  <link rel="stylesheet" href="admin.css?v=3">
 </head>
 <body class="auth-page">
   <main class="auth-card">
