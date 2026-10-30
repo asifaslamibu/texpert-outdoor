@@ -6,7 +6,7 @@ $id = (int)($_GET['id'] ?? 0);
 $product = $id ? query('SELECT * FROM products WHERE id = ?', [$id])->fetch() : null;
 if ($id && !$product) { flash('Product not found.', 'err'); redirect('products.php'); }
 
-$defaults = ['name' => '', 'brand' => '', 'subcategory_id' => 0, 'description' => '', 'price' => '', 'old_price' => '', 'stock' => 10,
+$defaults = ['name' => '', 'sku' => '', 'brand' => '', 'subcategory_id' => 0, 'description' => '', 'price' => '', 'old_price' => '', 'stock' => 10,
              'rating' => 0, 'reviews' => 0, 'image' => '', 'is_new' => 0, 'is_active' => 1];
 $data = $product ?: $defaults;
 $errors = [];
@@ -31,6 +31,7 @@ if (is_post()) {
     check_csrf();
     $data = [
         'name' => trim($_POST['name'] ?? ''),
+        'sku' => mb_substr(trim($_POST['sku'] ?? ''), 0, 64),
         'brand' => trim($_POST['brand'] ?? ''),
         'subcategory_id' => (int)($_POST['subcategory_id'] ?? 0),
         'description' => trim($_POST['description'] ?? ''),
@@ -56,15 +57,15 @@ if (is_post()) {
         $oldImage = $data['image'];
         if ($uploaded) $data['image'] = $uploaded;
         if (isset($_POST['remove_image']) && !$uploaded) $data['image'] = '';
-        $values = [$data['subcategory_id'], $data['name'], slugify($data['name']), $data['brand'], $data['description'] ?: null,
+        $values = [$data['subcategory_id'], $data['sku'], $data['name'], slugify($data['name']), $data['brand'], $data['description'] ?: null,
                    (float)$data['price'], $data['old_price'] !== '' ? (float)$data['old_price'] : null, $data['stock'], $data['rating'],
                    $data['reviews'], $data['image'], $data['is_new'], $data['is_active']];
         if ($product) {
-            query('UPDATE products SET subcategory_id = ?, name = ?, slug = ?, brand = ?, description = ?, price = ?, old_price = ?, stock = ?,
+            query('UPDATE products SET subcategory_id = ?, sku = ?, name = ?, slug = ?, brand = ?, description = ?, price = ?, old_price = ?, stock = ?,
                    rating = ?, reviews = ?, image = ?, is_new = ?, is_active = ? WHERE id = ?', [...$values, $id]);
         } else {
-            query('INSERT INTO products (subcategory_id, name, slug, brand, description, price, old_price, stock, rating, reviews, image, is_new, is_active)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $values);
+            query('INSERT INTO products (subcategory_id, sku, name, slug, brand, description, price, old_price, stock, rating, reviews, image, is_new, is_active)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $values);
             $id = (int)db()->lastInsertId();
         }
         // Remove a replaced upload (never the original stock images)
@@ -88,8 +89,9 @@ admin_header($product ? 'Edit Product' : 'Add Product', 'products');
   <?= csrf_field() ?>
   <section class="card stack">
     <label>Product Name<input name="name" required value="<?= e($data['name']) ?>"></label>
-    <div class="row-2">
+    <div class="row-3">
       <label>Brand<input name="brand" value="<?= e($data['brand']) ?>"></label>
+      <label>SKU<input name="sku" maxlength="64" value="<?= e($data['sku']) ?>"></label>
       <label>Category
         <select name="subcategory_id" required>
           <option value="">Choose…</option>

@@ -11,7 +11,7 @@ header('Cache-Control: no-cache');
 try {
     $cats = query('SELECT id, name, short_name, slug, icon FROM categories ORDER BY sort_order, id')->fetchAll();
     $subs = query('SELECT id, category_id, name, slug FROM subcategories ORDER BY sort_order, id')->fetchAll();
-    $prods = query('SELECT id, subcategory_id, name, brand, description, price, old_price, stock, rating, reviews, image, is_new
+    $prods = query('SELECT id, subcategory_id, sku, name, brand, description, price, old_price, stock, rating, reviews, image, is_new
                     FROM products WHERE is_active = 1 ORDER BY id')->fetchAll();
 } catch (Throwable $e) {
     error_log('[texpert catalog] ' . $e->getMessage());
@@ -24,6 +24,7 @@ foreach ($prods as $p) {
     $bySub[$p['subcategory_id']][] = [
         'id' => (int)$p['id'],
         'name' => $p['name'],
+        'sku' => $p['sku'],
         'brand' => $p['brand'],
         'description' => (string)$p['description'],
         'price' => (float)$p['price'],

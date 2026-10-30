@@ -42,7 +42,7 @@ function productCard(p) {
       ${p.tag ? `<span class="product-tag ${p.tag === 'Sale' ? 'tag-sale' : ''}">${p.tag}</span>` : ''}
       <button class="product-wish${inWish ? ' active' : ''}" data-id="${p.id}" aria-label="Add to wishlist"><i class="fa-${inWish ? 'solid' : 'regular'} fa-heart"></i></button>
       <a href="${productUrl(p)}" class="product-img">${imgWithFallback(p.img, p.name, p.icon)}</a>
-      <div class="rating">${stars(p.rating)}<small>(${p.reviews})</small></div>
+      ${p.reviews ? `<div class="rating">${stars(p.rating)}<small>(${p.reviews})</small></div>` : `<div class="product-brand">${p.brand}</div>`}
       <h3><a href="${productUrl(p)}">${p.name}</a></h3>
       <div class="price">
         <strong class="${p.oldPrice ? 'is-sale' : ''}">${money(p.price)}</strong>

@@ -7,6 +7,7 @@ PHP 8.1+ and MySQL/MariaDB, no frameworks or Composer. Runs on Hostinger shared 
 | Area | Where |
 |---|---|
 | Admin panel: dashboard, orders, products (with image upload), categories, customers, contact queries, subscribers, admin users | `/admin/` |
+| Bulk product import from CSV (creates missing categories, copies images, re-import updates price and stock) | `/admin/import.php`, `includes/importer.php` |
 | Live catalog for the storefront | `api/catalog.php` (loaded before `assets/js/data.js`) |
 | Checkout, prices and stock checked on the server | `api/checkout.php` |
 | Stripe card payments (hosted Checkout + webhook) | `api/checkout.php`, `api/pay.php`, `api/stripe-webhook.php` |

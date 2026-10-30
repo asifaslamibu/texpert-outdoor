@@ -8,6 +8,15 @@ header('X-Frame-Options: DENY');
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: same-origin');
 
+// Columns added after the first release; databases created before them get them here.
+function migrate_db(): void
+{
+    if (!query("SHOW COLUMNS FROM products LIKE 'sku'")->fetch()) {
+        db()->exec("ALTER TABLE products ADD COLUMN sku VARCHAR(64) NOT NULL DEFAULT '' AFTER subcategory_id");
+    }
+}
+migrate_db();
+
 function current_admin(): ?array
 {
     if (empty($_SESSION['admin_id'])) return null;

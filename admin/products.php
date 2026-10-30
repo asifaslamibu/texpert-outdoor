@@ -56,7 +56,7 @@ $cat = (int)($_GET['cat'] ?? 0);
 $stock = $_GET['stock'] ?? '';
 $where = ['1 = 1'];
 $params = [];
-if ($q !== '') { $where[] = '(p.name LIKE ? OR p.brand LIKE ?)'; $params[] = "%$q%"; $params[] = "%$q%"; }
+if ($q !== '') { $where[] = '(p.name LIKE ? OR p.brand LIKE ? OR p.sku = ?)'; $params[] = "%$q%"; $params[] = "%$q%"; $params[] = $q; }
 if ($cat) { $where[] = 'c.id = ?'; $params[] = $cat; }
 if ($stock === 'low') $where[] = 'p.stock <= 3';
 if ($stock === 'hidden') $where[] = 'p.is_active = 0';
@@ -74,7 +74,7 @@ admin_header('Products', 'products');
 ?>
 <div class="toolbar">
   <form class="filters-row" method="get">
-    <input type="search" name="q" value="<?= e($q) ?>" placeholder="Search name or brand">
+    <input type="search" name="q" value="<?= e($q) ?>" placeholder="Search name, brand or SKU">
     <select name="cat" onchange="this.form.submit()">
       <option value="">All categories</option>
       <?php foreach ($cats as $c): ?><option value="<?= $c['id'] ?>" <?= $cat === (int)$c['id'] ? 'selected' : '' ?>><?= e($c['name']) ?></option><?php endforeach; ?>
@@ -86,7 +86,10 @@ admin_header('Products', 'products');
     </select>
     <button class="btn btn-light">Filter</button>
   </form>
-  <a href="product-edit.php" class="btn"><i class="fa-solid fa-plus"></i> Add Product</a>
+  <span class="filters-row">
+    <a href="import.php" class="btn btn-light"><i class="fa-solid fa-file-import"></i> Import CSV</a>
+    <a href="product-edit.php" class="btn"><i class="fa-solid fa-plus"></i> Add Product</a>
+  </span>
 </div>
 
 <section class="card flush">
@@ -109,7 +112,7 @@ admin_header('Products', 'products');
       <tr>
         <td class="sel"><input type="checkbox" name="ids[]" value="<?= $p['id'] ?>" form="bulkForm" class="sel-box" aria-label="Select <?= e($p['name']) ?>"></td>
         <td><span class="thumb"><?php if ($p['image']): ?><img src="<?= e(img_url($p['image'])) ?>" alt="" loading="lazy"><?php endif; ?></span></td>
-        <td><a href="product-edit.php?id=<?= $p['id'] ?>"><strong><?= e($p['name']) ?></strong></a><br><small class="muted"><?= e($p['brand']) ?> · #<?= $p['id'] ?></small></td>
+        <td><a href="product-edit.php?id=<?= $p['id'] ?>"><strong><?= e($p['name']) ?></strong></a><br><small class="muted"><?= e($p['brand']) ?> · <?= $p['sku'] !== '' ? 'SKU ' . e($p['sku']) : '#' . $p['id'] ?></small></td>
         <td><?= e($p['cat_name']) ?><br><small class="muted"><?= e($p['sub_name']) ?></small></td>
         <td class="num"><?= money($p['price']) ?><?php if ($p['old_price']): ?><br><small class="muted"><s><?= money($p['old_price']) ?></s></small><?php endif; ?></td>
         <td class="num"><?= $p['stock'] > 0 ? (int)$p['stock'] : badge('out', 'Out') ?></td>

@@ -239,12 +239,13 @@ const products = [];
 const categories = catalog.map(cat => {
   const slug = slugify(cat.name);
   const subs = Object.entries(cat.subs).map(([subName, items]) => {
-    items.map(toItem).forEach(({ id, name, price, oldPrice, rating, reviews, img, imgKey, isNew, brand, description, stock }) => {
+    items.map(toItem).forEach(({ id, name, price, oldPrice, rating, reviews, img, imgKey, isNew, brand, description, stock, sku }) => {
       const pSlug = slugify(name);
       products.push({
         id: id || products.length + 1,
         name, slug: pSlug, brand: brand || brandOf(name), price, rating, reviews,
         description: description || '',
+        sku: sku || '',
         stock: stock ?? null,
         oldPrice: oldPrice || null,
         tag: oldPrice ? 'Sale' : (isNew ? 'New' : ''),

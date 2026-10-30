@@ -246,6 +246,7 @@ main > .section:last-of-type { padding-bottom: 72px; }
 .product:hover .product-img img { transform: scale(1.05); }
 .rating { color: var(--star); font-size: 11.5px; display: flex; align-items: center; gap: 2px; }
 .rating small { color: var(--muted); margin-left: 4px; font-size: 12px; }
+.product-brand { color: var(--muted); font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; line-height: 16px; }
 .product h3 { font-size: 14px; font-weight: 500; line-height: 1.35; margin: 6px 0 8px; flex: 1; }
 .price { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
 .price strong { font-size: 16px; }

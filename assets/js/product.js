@@ -21,7 +21,7 @@ if (!product) {
 } else {
   const p = product;
   const brand = p.brand;
-  const sku = `TXO-${String(p.id).padStart(5, '0')}`;
+  const sku = p.sku || `TXO-${String(p.id).padStart(5, '0')}`;
   document.title = `${p.name} | Texpert Outdoors`;
 
   // ===== Breadcrumb =====
@@ -34,7 +34,9 @@ if (!product) {
     + imgWithFallback(p.img, p.name, p.icon);
   $('#pdpBrand').textContent = brand;
   $('#pdpName').textContent = p.name;
-  $('#pdpRating').innerHTML = `${stars(p.rating)}<small>${p.rating.toFixed(1)} (${p.reviews} reviews)</small>`;
+  $('#pdpRating').innerHTML = p.reviews
+    ? `${stars(p.rating)}<small>${p.rating.toFixed(1)} (${p.reviews} reviews)</small>`
+    : `${stars(0)}<small>No reviews yet</small>`;
   $('#pdpSku').textContent = `SKU: ${sku}`;
   $('#pdpPrice').innerHTML = p.oldPrice
     ? `<strong class="is-sale">${money(p.price)}</strong><del>${money(p.oldPrice)}</del><span class="pdp-save">Save ${money(p.oldPrice - p.price)}</span>`
@@ -109,7 +111,7 @@ if (!product) {
     <ul>
       <li>Genuine ${brand} product, brand new in original packaging</li>
       <li>Category: ${p.categoryName} › ${p.subName}</li>
-      <li>Rated ${p.rating.toFixed(1)} out of 5 by ${p.reviews} customers</li>
+      ${p.reviews ? `<li>Rated ${p.rating.toFixed(1)} out of 5 by ${p.reviews} customers</li>` : ''}
       <li>Backed by our 60-day return policy</li>
     </ul>`;
   $('#pdpSpecs').innerHTML = [['Brand', brand], ['Category', p.categoryName], ['Type', p.subName], ['SKU', sku], ['Condition', 'New'], ['Warranty', 'Manufacturer warranty']]
