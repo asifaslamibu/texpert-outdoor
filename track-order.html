@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261030c">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261031">
 </head>
 <body>
 
@@ -51,7 +51,7 @@
       </form>
 
       <div class="header-actions">
-        <a href="track-order.html" class="action"><i class="fa-solid fa-box"></i><span>Track<br>Order</span></a>
+        <a href="account.html" class="action"><i class="fa-regular fa-circle-user"></i><span>My<br>Account</span></a>
         <a href="wishlist.html" class="action"><i class="fa-regular fa-heart"></i><span>Wishlist</span><em class="badge" id="wishCount">0</em></a>
         <a href="cart.html" class="action"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span><em class="badge" id="cartCount">0</em></a>
       </div>
@@ -88,7 +88,7 @@
       <div class="container">
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><span>Track an Order</span></nav>
         <h1>Track an Order</h1>
-        <p class="page-intro">Enter your order details and we will get back to you with a status update.</p>
+        <p class="page-intro">Enter your order number and email to see where your order is.</p>
       </div>
     </section>
     <section class="section">
@@ -96,8 +96,9 @@
         <form class="contact-form track-form" id="trackForm">
           <label>Order Number<input name="order" required placeholder="e.g. TXO-123456"></label>
           <label>Email Used for the Order<input type="email" name="email" required autocomplete="email"></label>
-          <p class="form-hint">Your order number is in the order email you sent us. Submitting opens your email app with a status request to sales@texpertoutdoors.com; we reply within one business day.</p>
-          <button type="submit" class="btn btn-primary">Request Status</button>
+          <p class="form-hint">Your order number (e.g. TXO-123456) is on your order confirmation and in your account.</p>
+          <button type="submit" class="btn btn-primary">Check Status</button>
+          <div id="trackResult"></div>
         </form>
         <aside class="help-card">
           <h3>Need a Hand?</h3>
@@ -118,6 +119,7 @@
         <h4>Customer Service</h4>
         <ul>
           <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="account.html">My Account</a></li>
           <li><a href="track-order.html">Track an Order</a></li>
           <li><a href="shipping.html">Shipping Information</a></li>
           <li><a href="returns.html">Returns &amp; Exchanges</a></li>
@@ -180,8 +182,9 @@
 
   <div class="toast" id="toast"></div>
 
-  <script src="assets/js/data.js?v=20261030c"></script>
-  <script src="assets/js/main.js?v=20261030c"></script>
-  <script src="assets/js/pages.js?v=20261030c"></script>
+  <script src="api/catalog.php"></script>
+  <script src="assets/js/data.js?v=20261031"></script>
+  <script src="assets/js/main.js?v=20261031"></script>
+  <script src="assets/js/pages.js?v=20261031"></script>
 </body>
 </html>

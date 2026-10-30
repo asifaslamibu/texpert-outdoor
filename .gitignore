@@ -1,0 +1,4 @@
+# Secrets and server-only data
+includes/config.php
+uploads/products/*
+!uploads/products/.gitkeep

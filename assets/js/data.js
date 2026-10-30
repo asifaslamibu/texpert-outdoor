@@ -20,9 +20,13 @@ const IMG = {
   hammock: STOCK('hammock')
 };
 
-// Products per subcategory. Format of each item:
+// Live catalog and settings from the database (api/catalog.php sets window.TXO).
+// When the backend is unavailable the built-in catalog below is used instead.
+const SITE = (window.TXO && window.TXO.config) || { api: false, stripe: false, freeOver: 75, flatRate: 9.95 };
+
+// Built-in products per subcategory. Format of each item:
 // [name, price, oldPrice (0 = none), rating, reviews, imageKey (or ''), isNew]
-const catalog = [
+const fallbackCatalog = [
   {
     name: 'Archery', short: 'Archery', icon: 'fa-bullseye',
     subs: {
@@ -224,18 +228,27 @@ const BRANDS = ['Trophy Ridge', 'Carbon Express', 'Outdoor Edge', 'Butler Creek'
 const brandOf = name => (BRANDS.find(b => name.startsWith(b)) || name.split(' ')[0]).replace(/'s$/, '');
 
 // Flatten into categories + products
+const catalog = (window.TXO && window.TXO.catalog) || fallbackCatalog;
+
+// Database items arrive as objects, built-in ones as arrays
+const toItem = item => (Array.isArray(item)
+  ? { name: item[0], price: item[1], oldPrice: item[2], rating: item[3], reviews: item[4], imgKey: item[5], isNew: item[6] }
+  : item);
+
 const products = [];
 const categories = catalog.map(cat => {
   const slug = slugify(cat.name);
   const subs = Object.entries(cat.subs).map(([subName, items]) => {
-    items.forEach(([name, price, oldPrice, rating, reviews, imgKey, isNew]) => {
+    items.map(toItem).forEach(({ id, name, price, oldPrice, rating, reviews, img, imgKey, isNew, brand, description, stock }) => {
       const pSlug = slugify(name);
       products.push({
-        id: products.length + 1,
-        name, slug: pSlug, brand: brandOf(name), price, rating, reviews,
+        id: id || products.length + 1,
+        name, slug: pSlug, brand: brand || brandOf(name), price, rating, reviews,
+        description: description || '',
+        stock: stock ?? null,
         oldPrice: oldPrice || null,
         tag: oldPrice ? 'Sale' : (isNew ? 'New' : ''),
-        img: IMG[imgKey] || `assets/images/products/${pSlug}.jpg`,
+        img: img || IMG[imgKey] || `assets/images/products/${pSlug}.jpg`,
         icon: cat.icon,
         category: slug, categoryName: cat.name,
         sub: slugify(subName), subName

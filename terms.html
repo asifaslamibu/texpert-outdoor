@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261030c">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261031">
 </head>
 <body>
 
@@ -51,7 +51,7 @@
       </form>
 
       <div class="header-actions">
-        <a href="track-order.html" class="action"><i class="fa-solid fa-box"></i><span>Track<br>Order</span></a>
+        <a href="account.html" class="action"><i class="fa-regular fa-circle-user"></i><span>My<br>Account</span></a>
         <a href="wishlist.html" class="action"><i class="fa-regular fa-heart"></i><span>Wishlist</span><em class="badge" id="wishCount">0</em></a>
         <a href="cart.html" class="action"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span><em class="badge" id="cartCount">0</em></a>
       </div>
@@ -96,9 +96,9 @@
         <article class="prose">
           <p>By using texpertoutdoors.com or placing an order with Texpert Outdoors, you agree to these terms.</p>
           <h2>Orders &amp; Pricing</h2>
-          <p>Placing an order on our site sends us an order request. An order is accepted only when we confirm it with you. Prices and availability can change without notice, and we reserve the right to refuse or cancel any order, including orders with pricing or stock errors.</p>
+          <p>An order is accepted when we confirm it, either automatically after a successful card payment or by our team for Pay Later orders. Prices and availability can change without notice, and we reserve the right to refuse or cancel any order, including orders with pricing or stock errors.</p>
           <h2>Payment</h2>
-          <p>We confirm payment with you directly after you place your order. Your order ships or is ready for pickup once payment is received.</p>
+          <p>Card payments are processed securely by Stripe; we do not see or store your card details. Pay Later orders are paid by phone or at pickup. Your order ships or is ready for pickup once payment is received.</p>
           <h2>Shipping &amp; Returns</h2>
           <p>Shipping is covered by our <a href="shipping.html">Shipping Information</a> and returns by our <a href="returns.html">Returns &amp; Exchanges</a> policy.</p>
           <h2>Age &amp; Legal Restrictions</h2>
@@ -133,6 +133,7 @@
         <h4>Customer Service</h4>
         <ul>
           <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="account.html">My Account</a></li>
           <li><a href="track-order.html">Track an Order</a></li>
           <li><a href="shipping.html">Shipping Information</a></li>
           <li><a href="returns.html">Returns &amp; Exchanges</a></li>
@@ -195,8 +196,9 @@
 
   <div class="toast" id="toast"></div>
 
-  <script src="assets/js/data.js?v=20261030c"></script>
-  <script src="assets/js/main.js?v=20261030c"></script>
-  <script src="assets/js/pages.js?v=20261030c"></script>
+  <script src="api/catalog.php"></script>
+  <script src="assets/js/data.js?v=20261031"></script>
+  <script src="assets/js/main.js?v=20261031"></script>
+  <script src="assets/js/pages.js?v=20261031"></script>
 </body>
 </html>

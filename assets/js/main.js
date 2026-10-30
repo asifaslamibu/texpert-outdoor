@@ -66,6 +66,28 @@ function bump(el) {
   setTimeout(() => el.classList.remove('bump'), 200);
 }
 
+// JSON call to the PHP backend. Throws an Error with a customer-friendly message on failure.
+async function apiCall(path, body) {
+  let res;
+  try {
+    res = await fetch(path, {
+      method: body ? 'POST' : 'GET',
+      headers: body ? { 'Content-Type': 'application/json' } : {},
+      body: body ? JSON.stringify(body) : undefined,
+      credentials: 'same-origin'
+    });
+  } catch {
+    throw new Error('Could not reach the store. Check your connection and try again.');
+  }
+  const data = await res.json().catch(() => null);
+  if (!data || !res.ok || !data.ok) {
+    const err = new Error(data?.error || 'Something went wrong. Please try again or call +1-254-358-0017.');
+    err.status = res.status;
+    throw err;
+  }
+  return data;
+}
+
 // ===== Cart & Wishlist (persisted in localStorage) =====
 function load(key) {
   try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; }
@@ -195,11 +217,21 @@ if (directory) {
   $$('.dir-count').forEach(el => { el.textContent = stocked.length; });
 }
 
-// ===== Footer sign-up forms =====
-['#signupForm', '#smsForm'].forEach(sel => {
-  $(sel)?.addEventListener('submit', e => {
+// ===== Footer sign-up forms (saved to the backend when it is available) =====
+[['#signupForm', 'email'], ['#smsForm', 'sms']].forEach(([sel, type]) => {
+  $(sel)?.addEventListener('submit', async e => {
     e.preventDefault();
-    e.target.reset();
+    const form = e.target;
+    const value = $('input', form).value.trim();
+    if (SITE.api) {
+      try {
+        await apiCall('api/subscribe.php', { type, value });
+      } catch (err) {
+        showToast(err.message);
+        return;
+      }
+    }
+    form.reset();
     showToast('Thanks for signing up!');
   });
 });

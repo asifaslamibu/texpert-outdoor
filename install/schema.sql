@@ -1,0 +1,124 @@
+-- Texpert Outdoors database schema (MySQL 5.7+ / MariaDB 10.3+)
+
+CREATE TABLE IF NOT EXISTS admins (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(190) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS categories (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  short_name VARCHAR(60) NOT NULL,
+  slug VARCHAR(140) NOT NULL UNIQUE,
+  icon VARCHAR(60) NOT NULL DEFAULT 'fa-tag',
+  sort_order INT NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS subcategories (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  category_id INT UNSIGNED NOT NULL,
+  name VARCHAR(120) NOT NULL,
+  slug VARCHAR(140) NOT NULL,
+  sort_order INT NOT NULL DEFAULT 0,
+  UNIQUE KEY uq_sub (category_id, slug),
+  CONSTRAINT fk_sub_cat FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS products (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  subcategory_id INT UNSIGNED NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  slug VARCHAR(255) NOT NULL,
+  brand VARCHAR(120) NOT NULL DEFAULT '',
+  description TEXT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  old_price DECIMAL(10,2) NULL,
+  stock INT NOT NULL DEFAULT 10,
+  rating DECIMAL(2,1) NOT NULL DEFAULT 0,
+  reviews INT NOT NULL DEFAULT 0,
+  image VARCHAR(255) NOT NULL DEFAULT '',
+  is_new TINYINT(1) NOT NULL DEFAULT 0,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_sub (subcategory_id),
+  CONSTRAINT fk_prod_sub FOREIGN KEY (subcategory_id) REFERENCES subcategories(id) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS customers (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(80) NOT NULL,
+  last_name VARCHAR(80) NOT NULL DEFAULT '',
+  email VARCHAR(190) NOT NULL UNIQUE,
+  phone VARCHAR(40) NOT NULL DEFAULT '',
+  password_hash VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL DEFAULT '',
+  city VARCHAR(100) NOT NULL DEFAULT '',
+  state VARCHAR(60) NOT NULL DEFAULT '',
+  zip VARCHAR(20) NOT NULL DEFAULT '',
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS orders (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  order_no VARCHAR(20) NOT NULL UNIQUE,
+  token CHAR(32) NOT NULL,
+  customer_id INT UNSIGNED NULL,
+  first_name VARCHAR(80) NOT NULL,
+  last_name VARCHAR(80) NOT NULL DEFAULT '',
+  email VARCHAR(190) NOT NULL,
+  phone VARCHAR(40) NOT NULL,
+  delivery ENUM('ship','pickup') NOT NULL DEFAULT 'ship',
+  address VARCHAR(255) NOT NULL DEFAULT '',
+  city VARCHAR(100) NOT NULL DEFAULT '',
+  state VARCHAR(60) NOT NULL DEFAULT '',
+  zip VARCHAR(20) NOT NULL DEFAULT '',
+  notes TEXT NULL,
+  subtotal DECIMAL(10,2) NOT NULL,
+  shipping DECIMAL(10,2) NOT NULL DEFAULT 0,
+  total DECIMAL(10,2) NOT NULL,
+  payment_method ENUM('card','later') NOT NULL DEFAULT 'later',
+  payment_status ENUM('unpaid','pending','paid','refunded','failed') NOT NULL DEFAULT 'unpaid',
+  stripe_session_id VARCHAR(255) NULL,
+  status ENUM('new','confirmed','processing','shipped','ready_for_pickup','completed','cancelled') NOT NULL DEFAULT 'new',
+  tracking_number VARCHAR(120) NOT NULL DEFAULT '',
+  admin_note TEXT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_customer (customer_id),
+  KEY idx_session (stripe_session_id),
+  CONSTRAINT fk_order_customer FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  order_id INT UNSIGNED NOT NULL,
+  product_id INT UNSIGNED NULL,
+  name VARCHAR(255) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  qty INT NOT NULL,
+  CONSTRAINT fk_item_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+  CONSTRAINT fk_item_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS messages (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(190) NOT NULL,
+  phone VARCHAR(40) NOT NULL DEFAULT '',
+  topic VARCHAR(80) NOT NULL DEFAULT '',
+  message TEXT NOT NULL,
+  status ENUM('new','read','archived') NOT NULL DEFAULT 'new',
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS subscribers (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  type ENUM('email','sms') NOT NULL,
+  value VARCHAR(190) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_sub (type, value)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

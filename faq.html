@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261030c">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261031">
 </head>
 <body>
 
@@ -51,7 +51,7 @@
       </form>
 
       <div class="header-actions">
-        <a href="track-order.html" class="action"><i class="fa-solid fa-box"></i><span>Track<br>Order</span></a>
+        <a href="account.html" class="action"><i class="fa-regular fa-circle-user"></i><span>My<br>Account</span></a>
         <a href="wishlist.html" class="action"><i class="fa-regular fa-heart"></i><span>Wishlist</span><em class="badge" id="wishCount">0</em></a>
         <a href="cart.html" class="action"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span><em class="badge" id="cartCount">0</em></a>
       </div>
@@ -94,11 +94,12 @@
       <div class="container prose-layout">
         <article class="prose">
           <h2>Orders</h2>
-          <details><summary>How do I place an order?</summary><p>Add items to your cart and go to checkout. Placing the order opens your email app with your order details; send it and our team will call you to confirm stock, your total and payment.</p></details>
-          <details><summary>Which payment methods do you accept?</summary><p>We confirm payment with you directly by phone after you place your order. Pay in store when you pick up, or ask our team about card payment over the phone.</p></details>
+          <details><summary>How do I place an order?</summary><p>Add items to your cart and go to checkout. Pay securely by card, or choose Pay Later and our team will call you to confirm stock and payment. You will get an order number right away.</p></details>
+          <details><summary>Which payment methods do you accept?</summary><p>Pay online by credit or debit card through Stripe's secure checkout, or choose Pay Later and pay by phone or in store when you pick up. We never see or store your card details.</p></details>
           <details><summary>Can I change or cancel my order?</summary><p>Yes. Call us at +1-254-358-0017 or email sales@texpertoutdoors.com as soon as possible. Orders that have not shipped can usually be changed or cancelled.</p></details>
           <h2>Shipping &amp; Pickup</h2>
           <details><summary>How much is shipping?</summary><p>Standard shipping is free on orders of $75 or more. Orders under $75 ship for a flat $9.95.</p></details>
+          <details><summary>Where is my order?</summary><p>Use <a href="track-order.html">Track an Order</a> with your order number and email, or sign in to <a href="account.html">your account</a> to see all your orders.</p></details>
           <details><summary>How long will my order take?</summary><p>Most orders ship within 1–2 business days and arrive within 3–7 business days. See <a href="shipping.html">Shipping Information</a> for details.</p></details>
           <details><summary>Can I pick up my order in store?</summary><p>Yes, store pickup is free at 2990 Congressman Ln, Dallas, TX 75220. Choose "Pick Up in Store" at checkout and we will contact you when your order is ready.</p></details>
           <h2>Returns</h2>
@@ -127,6 +128,7 @@
         <h4>Customer Service</h4>
         <ul>
           <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="account.html">My Account</a></li>
           <li><a href="track-order.html">Track an Order</a></li>
           <li><a href="shipping.html">Shipping Information</a></li>
           <li><a href="returns.html">Returns &amp; Exchanges</a></li>
@@ -189,8 +191,9 @@
 
   <div class="toast" id="toast"></div>
 
-  <script src="assets/js/data.js?v=20261030c"></script>
-  <script src="assets/js/main.js?v=20261030c"></script>
-  <script src="assets/js/pages.js?v=20261030c"></script>
+  <script src="api/catalog.php"></script>
+  <script src="assets/js/data.js?v=20261031"></script>
+  <script src="assets/js/main.js?v=20261031"></script>
+  <script src="assets/js/pages.js?v=20261031"></script>
 </body>
 </html>

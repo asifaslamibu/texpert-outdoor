@@ -1,0 +1,1109 @@
+{
+ "categories": [
+  {
+   "name": "Archery",
+   "short": "Archery",
+   "icon": "fa-bullseye",
+   "slug": "archery",
+   "sort": 0,
+   "subs": [
+    {
+     "name": "Bow Sights",
+     "slug": "bow-sights",
+     "sort": 0
+    },
+    {
+     "name": "Arrow Rests",
+     "slug": "arrow-rests",
+     "sort": 1
+    },
+    {
+     "name": "Quivers",
+     "slug": "quivers",
+     "sort": 2
+    },
+    {
+     "name": "Stabilizers",
+     "slug": "stabilizers",
+     "sort": 3
+    },
+    {
+     "name": "Broadheads",
+     "slug": "broadheads",
+     "sort": 4
+    },
+    {
+     "name": "Broadhead Blades & Accessories",
+     "slug": "broadhead-blades-and-accessories",
+     "sort": 5
+    },
+    {
+     "name": "Archery Tools",
+     "slug": "archery-tools",
+     "sort": 6
+    },
+    {
+     "name": "Dampeners & Silencers",
+     "slug": "dampeners-and-silencers",
+     "sort": 7
+    },
+    {
+     "name": "Arrows",
+     "slug": "arrows",
+     "sort": 8
+    },
+    {
+     "name": "Nocks",
+     "slug": "nocks",
+     "sort": 9
+    },
+    {
+     "name": "Bow Releases",
+     "slug": "bow-releases",
+     "sort": 10
+    },
+    {
+     "name": "Arrow Vanes",
+     "slug": "arrow-vanes",
+     "sort": 11
+    }
+   ]
+  },
+  {
+   "name": "Outdoor Gear",
+   "short": "Outdoor Gear",
+   "icon": "fa-person-hiking",
+   "slug": "outdoor-gear",
+   "sort": 1,
+   "subs": [
+    {
+     "name": "Bags & Packs",
+     "slug": "bags-and-packs",
+     "sort": 0
+    },
+    {
+     "name": "Bats & Impact Tools",
+     "slug": "bats-and-impact-tools",
+     "sort": 1
+    },
+    {
+     "name": "Fishing Accessories",
+     "slug": "fishing-accessories",
+     "sort": 2
+    },
+    {
+     "name": "Storage Boxes & Outdoor Gear",
+     "slug": "storage-boxes-and-outdoor-gear",
+     "sort": 3
+    },
+    {
+     "name": "Lighters",
+     "slug": "lighters",
+     "sort": 4
+    },
+    {
+     "name": "Hand Warmers",
+     "slug": "hand-warmers",
+     "sort": 5
+    },
+    {
+     "name": "Fire Starters",
+     "slug": "fire-starters",
+     "sort": 6
+    },
+    {
+     "name": "Lighter Accessories",
+     "slug": "lighter-accessories",
+     "sort": 7
+    },
+    {
+     "name": "Candles",
+     "slug": "candles",
+     "sort": 8
+    }
+   ]
+  },
+  {
+   "name": "Knives & Multi-Tools",
+   "short": "Knives & Tools",
+   "icon": "fa-screwdriver-wrench",
+   "slug": "knives-and-multi-tools",
+   "sort": 2,
+   "subs": [
+    {
+     "name": "Folding Knives",
+     "slug": "folding-knives",
+     "sort": 0
+    },
+    {
+     "name": "Fixed Blade Knives",
+     "slug": "fixed-blade-knives",
+     "sort": 1
+    },
+    {
+     "name": "Tactical Pens",
+     "slug": "tactical-pens",
+     "sort": 2
+    },
+    {
+     "name": "Multi-Tools",
+     "slug": "multi-tools",
+     "sort": 3
+    },
+    {
+     "name": "Swords",
+     "slug": "swords",
+     "sort": 4
+    },
+    {
+     "name": "Axes & Hatchets",
+     "slug": "axes-and-hatchets",
+     "sort": 5
+    },
+    {
+     "name": "Knife Accessories",
+     "slug": "knife-accessories",
+     "sort": 6
+    }
+   ]
+  },
+  {
+   "name": "Hunting Accessories",
+   "short": "Hunting",
+   "icon": "fa-binoculars",
+   "slug": "hunting-accessories",
+   "sort": 3,
+   "subs": [
+    {
+     "name": "Boot & Gear Care",
+     "slug": "boot-and-gear-care",
+     "sort": 0
+    },
+    {
+     "name": "Scent Control & Laundry Care",
+     "slug": "scent-control-and-laundry-care",
+     "sort": 1
+    },
+    {
+     "name": "Blinds & Seating",
+     "slug": "blinds-and-seating",
+     "sort": 2
+    },
+    {
+     "name": "Slings",
+     "slug": "slings",
+     "sort": 3
+    },
+    {
+     "name": "Game Calls",
+     "slug": "game-calls",
+     "sort": 4
+    },
+    {
+     "name": "Trail Cameras",
+     "slug": "trail-cameras",
+     "sort": 5
+    }
+   ]
+  },
+  {
+   "name": "Optics & Sights",
+   "short": "Optics",
+   "icon": "fa-crosshairs",
+   "slug": "optics-and-sights",
+   "sort": 4,
+   "subs": [
+    {
+     "name": "Scope Mounts & Accessories",
+     "slug": "scope-mounts-and-accessories",
+     "sort": 0
+    },
+    {
+     "name": "Scopes",
+     "slug": "scopes",
+     "sort": 1
+    },
+    {
+     "name": "Red Dot Sights",
+     "slug": "red-dot-sights",
+     "sort": 2
+    },
+    {
+     "name": "Handgun Sights",
+     "slug": "handgun-sights",
+     "sort": 3
+    },
+    {
+     "name": "Optic Mounting Plates",
+     "slug": "optic-mounting-plates",
+     "sort": 4
+    }
+   ]
+  },
+  {
+   "name": "Shooting Accessories",
+   "short": "Shooting",
+   "icon": "fa-box-archive",
+   "slug": "shooting-accessories",
+   "sort": 5,
+   "subs": [
+    {
+     "name": "Shooting Rests & Bags",
+     "slug": "shooting-rests-and-bags",
+     "sort": 0
+    },
+    {
+     "name": "Chronographs & Wind Meters",
+     "slug": "chronographs-and-wind-meters",
+     "sort": 1
+    },
+    {
+     "name": "Bipods & Tripods",
+     "slug": "bipods-and-tripods",
+     "sort": 2
+    },
+    {
+     "name": "Targets & Accessories",
+     "slug": "targets-and-accessories",
+     "sort": 3
+    }
+   ]
+  },
+  {
+   "name": "Gun Cases & Storage",
+   "short": "Gun Cases",
+   "icon": "fa-suitcase",
+   "slug": "gun-cases-and-storage",
+   "sort": 6,
+   "subs": [
+    {
+     "name": "Gun Cases",
+     "slug": "gun-cases",
+     "sort": 0
+    },
+    {
+     "name": "Gun Safe Accessories",
+     "slug": "gun-safe-accessories",
+     "sort": 1
+    },
+    {
+     "name": "Ammo Cans & Boxes",
+     "slug": "ammo-cans-and-boxes",
+     "sort": 2
+    },
+    {
+     "name": "Bow & Arrow Cases",
+     "slug": "bow-and-arrow-cases",
+     "sort": 3
+    }
+   ]
+  },
+  {
+   "name": "Airgun Ammunition & Accessories",
+   "short": "Airgun Ammo",
+   "icon": "fa-circle-dot",
+   "slug": "airgun-ammunition-and-accessories",
+   "sort": 7,
+   "subs": [
+    {
+     "name": "Pellets & BBs",
+     "slug": "pellets-and-bbs",
+     "sort": 0
+    },
+    {
+     "name": "Airgun Accessories",
+     "slug": "airgun-accessories",
+     "sort": 1
+    },
+    {
+     "name": "CO2 Cartridges",
+     "slug": "co2-cartridges",
+     "sort": 2
+    }
+   ]
+  },
+  {
+   "name": "Airguns & Air Rifles",
+   "short": "Airguns",
+   "icon": "fa-gun",
+   "slug": "airguns-and-air-rifles",
+   "sort": 8,
+   "subs": [
+    {
+     "name": "Air Rifles & Pistols",
+     "slug": "air-rifles-and-pistols",
+     "sort": 0
+    },
+    {
+     "name": "Airsoft Guns & BBs",
+     "slug": "airsoft-guns-and-bbs",
+     "sort": 1
+    },
+    {
+     "name": "Slingshots",
+     "slug": "slingshots",
+     "sort": 2
+    }
+   ]
+  },
+  {
+   "name": "Gunsmithing Tools",
+   "short": "Gunsmithing",
+   "icon": "fa-toolbox",
+   "slug": "gunsmithing-tools",
+   "sort": 9,
+   "subs": [
+    {
+     "name": "Gunsmithing Screwdrivers",
+     "slug": "gunsmithing-screwdrivers",
+     "sort": 0
+    },
+    {
+     "name": "Gun Vises",
+     "slug": "gun-vises",
+     "sort": 1
+    },
+    {
+     "name": "Gunsmithing Tools",
+     "slug": "gunsmithing-tools",
+     "sort": 2
+    }
+   ]
+  },
+  {
+   "name": "Gun Care & Cleaning",
+   "short": "Gun Care",
+   "icon": "fa-spray-can",
+   "slug": "gun-care-and-cleaning",
+   "sort": 10,
+   "subs": [
+    {
+     "name": "Cleaning Kits & Supplies",
+     "slug": "cleaning-kits-and-supplies",
+     "sort": 0
+    },
+    {
+     "name": "Gun Oils & Solvents",
+     "slug": "gun-oils-and-solvents",
+     "sort": 1
+    }
+   ]
+  },
+  {
+   "name": "Reloading Equipment",
+   "short": "Reloading",
+   "icon": "fa-gears",
+   "slug": "reloading-equipment",
+   "sort": 11,
+   "subs": [
+    {
+     "name": "Reloading Equipment",
+     "slug": "reloading-equipment",
+     "sort": 0
+    }
+   ]
+  }
+ ],
+ "products": [
+  {
+   "id": 1,
+   "name": "Trophy Ridge Fix 5-Pin Bow Sight",
+   "slug": "trophy-ridge-fix-5-pin-bow-sight",
+   "brand": "Trophy Ridge",
+   "category": "archery",
+   "sub": "bow-sights",
+   "price": 100.49,
+   "old_price": null,
+   "rating": 4.5,
+   "reviews": 431,
+   "image": "assets/images/products/trophy-ridge-fix-5-pin-bow-sight.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 2,
+   "name": "Trophy Ridge React H4 4-Pin Bow Sight",
+   "slug": "trophy-ridge-react-h4-4-pin-bow-sight",
+   "brand": "Trophy Ridge",
+   "category": "archery",
+   "sub": "bow-sights",
+   "price": 109.99,
+   "old_price": null,
+   "rating": 4.8,
+   "reviews": 386,
+   "image": "assets/images/products/trophy-ridge-react-h4-4-pin-bow-sight.jpg",
+   "is_new": 1
+  },
+  {
+   "id": 3,
+   "name": "Trophy Ridge Blitz Stabilizer 6\"",
+   "slug": "trophy-ridge-blitz-stabilizer-6",
+   "brand": "Trophy Ridge",
+   "category": "archery",
+   "sub": "stabilizers",
+   "price": 20.99,
+   "old_price": null,
+   "rating": 4.2,
+   "reviews": 484,
+   "image": "assets/images/products/trophy-ridge-blitz-stabilizer-6.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 4,
+   "name": "Rage Hypodermic NC Broadhead 100 gr 3-Pack",
+   "slug": "rage-hypodermic-nc-broadhead-100-gr-3-pack",
+   "brand": "Rage",
+   "category": "archery",
+   "sub": "broadheads",
+   "price": 49.99,
+   "old_price": null,
+   "rating": 4.8,
+   "reviews": 242,
+   "image": "assets/images/products/rage-hypodermic-nc-broadhead-100-gr-3-pack.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 5,
+   "name": "Muzzy Trocar HB Hybrid 4-Blade Broadhead 100 gr 3-Pack",
+   "slug": "muzzy-trocar-hb-hybrid-4-blade-broadhead-100-gr-3-pack",
+   "brand": "Muzzy",
+   "category": "archery",
+   "sub": "broadheads",
+   "price": 39.99,
+   "old_price": null,
+   "rating": 4.7,
+   "reviews": 457,
+   "image": "assets/images/products/muzzy-trocar-hb-hybrid-4-blade-broadhead-100-gr-3-pack.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 6,
+   "name": "Truglo Crossbow Bolt Puller",
+   "slug": "truglo-crossbow-bolt-puller",
+   "brand": "Truglo",
+   "category": "archery",
+   "sub": "archery-tools",
+   "price": 7.29,
+   "old_price": null,
+   "rating": 4.7,
+   "reviews": 129,
+   "image": "assets/images/products/truglo-crossbow-bolt-puller.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 7,
+   "name": "Ravin Crossbow Vibration Dampeners",
+   "slug": "ravin-crossbow-vibration-dampeners",
+   "brand": "Ravin",
+   "category": "archery",
+   "sub": "dampeners-and-silencers",
+   "price": 34.49,
+   "old_price": null,
+   "rating": 4.6,
+   "reviews": 168,
+   "image": "assets/images/products/ravin-crossbow-vibration-dampeners.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 8,
+   "name": "Carbon Express PileDriver Crossbow Bolts 20\" 6-Pack",
+   "slug": "carbon-express-piledriver-crossbow-bolts-20-6-pack",
+   "brand": "Carbon Express",
+   "category": "archery",
+   "sub": "arrows",
+   "price": 44.99,
+   "old_price": null,
+   "rating": 4.4,
+   "reviews": 462,
+   "image": "assets/images/products/carbon-express-piledriver-crossbow-bolts-20-6-pack.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 9,
+   "name": "Ravin Premium Crossbow Bolts 400 gr 6-Pack",
+   "slug": "ravin-premium-crossbow-bolts-400-gr-6-pack",
+   "brand": "Ravin",
+   "category": "archery",
+   "sub": "arrows",
+   "price": 119.99,
+   "old_price": null,
+   "rating": 4.7,
+   "reviews": 409,
+   "image": "assets/images/products/ravin-premium-crossbow-bolts-400-gr-6-pack.jpg",
+   "is_new": 1
+  },
+  {
+   "id": 10,
+   "name": "Nockturnal Universal Lighted Nocks Green",
+   "slug": "nockturnal-universal-lighted-nocks-green",
+   "brand": "Nockturnal",
+   "category": "archery",
+   "sub": "nocks",
+   "price": 29.99,
+   "old_price": null,
+   "rating": 4.7,
+   "reviews": 345,
+   "image": "assets/images/products/nockturnal-universal-lighted-nocks-green.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 11,
+   "name": "Allen Back Country Bull Kit Game Bags",
+   "slug": "allen-back-country-bull-kit-game-bags",
+   "brand": "Allen",
+   "category": "outdoor-gear",
+   "sub": "bags-and-packs",
+   "price": 75.61,
+   "old_price": 82.99,
+   "rating": 4.2,
+   "reviews": 60,
+   "image": "assets/images/products/allen-back-country-bull-kit-game-bags.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 12,
+   "name": "Adventure Medical Trauma Pak with QuikClot",
+   "slug": "adventure-medical-trauma-pak-with-quikclot",
+   "brand": "Adventure Medical",
+   "category": "outdoor-gear",
+   "sub": "storage-boxes-and-outdoor-gear",
+   "price": 36.49,
+   "old_price": null,
+   "rating": 4.6,
+   "reviews": 488,
+   "image": "assets/images/products/adventure-medical-trauma-pak-with-quikclot.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 13,
+   "name": "Adventure Medical Mountain Hiker First Aid Kit",
+   "slug": "adventure-medical-mountain-hiker-first-aid-kit",
+   "brand": "Adventure Medical",
+   "category": "outdoor-gear",
+   "sub": "storage-boxes-and-outdoor-gear",
+   "price": 32.99,
+   "old_price": null,
+   "rating": 4.6,
+   "reviews": 32,
+   "image": "assets/images/products/adventure-medical-mountain-hiker-first-aid-kit.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 14,
+   "name": "Outdoor Edge RazorPro L Folding Knife 3.5\"",
+   "slug": "outdoor-edge-razorpro-l-folding-knife-3-5",
+   "brand": "Outdoor Edge",
+   "category": "knives-and-multi-tools",
+   "sub": "folding-knives",
+   "price": 44.99,
+   "old_price": null,
+   "rating": 4.9,
+   "reviews": 83,
+   "image": "assets/images/products/outdoor-edge-razorpro-l-folding-knife-3-5.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 15,
+   "name": "Outdoor Edge Razor XD3 Replaceable Blade Folding Knife",
+   "slug": "outdoor-edge-razor-xd3-replaceable-blade-folding-knife",
+   "brand": "Outdoor Edge",
+   "category": "knives-and-multi-tools",
+   "sub": "folding-knives",
+   "price": 59.99,
+   "old_price": null,
+   "rating": 4.3,
+   "reviews": 349,
+   "image": "assets/images/products/outdoor-edge-razor-xd3-replaceable-blade-folding-knife.jpg",
+   "is_new": 1
+  },
+  {
+   "id": 16,
+   "name": "Outdoor Edge ZipBlade Field Dressing Knife 4\"",
+   "slug": "outdoor-edge-zipblade-field-dressing-knife-4",
+   "brand": "Outdoor Edge",
+   "category": "knives-and-multi-tools",
+   "sub": "fixed-blade-knives",
+   "price": 13.99,
+   "old_price": 14.99,
+   "rating": 4.9,
+   "reviews": 91,
+   "image": "assets/images/products/outdoor-edge-zipblade-field-dressing-knife-4.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 17,
+   "name": "Outdoor Edge Wildpak 8-Piece Game Processing Kit",
+   "slug": "outdoor-edge-wildpak-8-piece-game-processing-kit",
+   "brand": "Outdoor Edge",
+   "category": "knives-and-multi-tools",
+   "sub": "knife-accessories",
+   "price": 49.99,
+   "old_price": null,
+   "rating": 4.2,
+   "reviews": 476,
+   "image": "assets/images/products/outdoor-edge-wildpak-8-piece-game-processing-kit.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 18,
+   "name": "Scent Thief Field Spray 24 oz",
+   "slug": "scent-thief-field-spray-24-oz",
+   "brand": "Scent Thief",
+   "category": "hunting-accessories",
+   "sub": "scent-control-and-laundry-care",
+   "price": 29.95,
+   "old_price": null,
+   "rating": 4.4,
+   "reviews": 206,
+   "image": "assets/images/products/scent-thief-field-spray-24-oz.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 19,
+   "name": "Scent-A-Way MAX Detergent Fresh Earth 32 oz",
+   "slug": "scent-a-way-max-detergent-fresh-earth-32-oz",
+   "brand": "Scent-A-Way",
+   "category": "hunting-accessories",
+   "sub": "scent-control-and-laundry-care",
+   "price": 31.81,
+   "old_price": null,
+   "rating": 4.8,
+   "reviews": 362,
+   "image": "assets/images/products/scent-a-way-max-detergent-fresh-earth-32-oz.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 20,
+   "name": "Wildlife Research Scent Killer Bar Soap",
+   "slug": "wildlife-research-scent-killer-bar-soap",
+   "brand": "Wildlife Research",
+   "category": "hunting-accessories",
+   "sub": "scent-control-and-laundry-care",
+   "price": 13.95,
+   "old_price": null,
+   "rating": 4.8,
+   "reviews": 458,
+   "image": "assets/images/products/wildlife-research-scent-killer-bar-soap.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 21,
+   "name": "Tink's PEAK30 Doe Estrus Fogger 5 oz",
+   "slug": "tink-s-peak30-doe-estrus-fogger-5-oz",
+   "brand": "Tink",
+   "category": "hunting-accessories",
+   "sub": "scent-control-and-laundry-care",
+   "price": 22.02,
+   "old_price": null,
+   "rating": 4.3,
+   "reviews": 173,
+   "image": "assets/images/products/tink-s-peak30-doe-estrus-fogger-5-oz.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 22,
+   "name": "Rhino R102 2-Man Ground Blind",
+   "slug": "rhino-r102-2-man-ground-blind",
+   "brand": "Rhino",
+   "category": "hunting-accessories",
+   "sub": "blinds-and-seating",
+   "price": 109.95,
+   "old_price": 129.99,
+   "rating": 4.3,
+   "reviews": 93,
+   "image": "assets/images/products/rhino-r102-2-man-ground-blind.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 23,
+   "name": "Ameristep Doghouse Extreme Ground Blind",
+   "slug": "ameristep-doghouse-extreme-ground-blind",
+   "brand": "Ameristep",
+   "category": "hunting-accessories",
+   "sub": "blinds-and-seating",
+   "price": 102.95,
+   "old_price": 149.99,
+   "rating": 4.3,
+   "reviews": 53,
+   "image": "assets/images/products/ameristep-doghouse-extreme-ground-blind.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 24,
+   "name": "Muddy Carnage 58x58 Die Cut Blind",
+   "slug": "muddy-carnage-58x58-die-cut-blind",
+   "brand": "Muddy",
+   "category": "hunting-accessories",
+   "sub": "blinds-and-seating",
+   "price": 226.1,
+   "old_price": null,
+   "rating": 4.8,
+   "reviews": 50,
+   "image": "assets/images/products/muddy-carnage-58x58-die-cut-blind.jpg",
+   "is_new": 1
+  },
+  {
+   "id": 25,
+   "name": "Knight & Hale Low Profile Blind Chair",
+   "slug": "knight-and-hale-low-profile-blind-chair",
+   "brand": "Knight & Hale",
+   "category": "hunting-accessories",
+   "sub": "blinds-and-seating",
+   "price": 135.95,
+   "old_price": null,
+   "rating": 4.9,
+   "reviews": 163,
+   "image": "assets/images/products/knight-and-hale-low-profile-blind-chair.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 26,
+   "name": "Millennium Steel Hang-On Treestand with Footrest",
+   "slug": "millennium-steel-hang-on-treestand-with-footrest",
+   "brand": "Millennium",
+   "category": "hunting-accessories",
+   "sub": "blinds-and-seating",
+   "price": 157.95,
+   "old_price": null,
+   "rating": 4.2,
+   "reviews": 332,
+   "image": "assets/images/products/millennium-steel-hang-on-treestand-with-footrest.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 27,
+   "name": "Primos Double Bull Tri-Stool Truth Camo",
+   "slug": "primos-double-bull-tri-stool-truth-camo",
+   "brand": "Primos",
+   "category": "hunting-accessories",
+   "sub": "blinds-and-seating",
+   "price": 79.95,
+   "old_price": null,
+   "rating": 4.3,
+   "reviews": 461,
+   "image": "assets/images/products/primos-double-bull-tri-stool-truth-camo.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 28,
+   "name": "Allen Foam Seat Cushion 13 x 14\"",
+   "slug": "allen-foam-seat-cushion-13-x-14",
+   "brand": "Allen",
+   "category": "hunting-accessories",
+   "sub": "blinds-and-seating",
+   "price": 32.34,
+   "old_price": null,
+   "rating": 4.7,
+   "reviews": 377,
+   "image": "assets/images/products/allen-foam-seat-cushion-13-x-14.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 29,
+   "name": "Ravin Crossbow Non-Slip Shoulder Sling",
+   "slug": "ravin-crossbow-non-slip-shoulder-sling",
+   "brand": "Ravin",
+   "category": "hunting-accessories",
+   "sub": "slings",
+   "price": 45.99,
+   "old_price": null,
+   "rating": 4.8,
+   "reviews": 354,
+   "image": "assets/images/products/ravin-crossbow-non-slip-shoulder-sling.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 30,
+   "name": "Quaker Boy Reign Box Call",
+   "slug": "quaker-boy-reign-box-call",
+   "brand": "Quaker Boy",
+   "category": "hunting-accessories",
+   "sub": "game-calls",
+   "price": 25.95,
+   "old_price": 26.99,
+   "rating": 4.2,
+   "reviews": 412,
+   "image": "assets/images/products/quaker-boy-reign-box-call.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 31,
+   "name": "Quaker Boy Kirby's Klassic Combo Turkey Call 3-Pack",
+   "slug": "quaker-boy-kirby-s-klassic-combo-turkey-call-3-pack",
+   "brand": "Quaker Boy",
+   "category": "hunting-accessories",
+   "sub": "game-calls",
+   "price": 46.95,
+   "old_price": 59.99,
+   "rating": 4.8,
+   "reviews": 74,
+   "image": "assets/images/products/quaker-boy-kirby-s-klassic-combo-turkey-call-3-pack.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 32,
+   "name": "Primos Hensanity Pot Call",
+   "slug": "primos-hensanity-pot-call",
+   "brand": "Primos",
+   "category": "hunting-accessories",
+   "sub": "game-calls",
+   "price": 47.95,
+   "old_price": 69.99,
+   "rating": 4.3,
+   "reviews": 301,
+   "image": "assets/images/products/primos-hensanity-pot-call.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 33,
+   "name": "Primos Elk Select Mouth Calls 4-Pack",
+   "slug": "primos-elk-select-mouth-calls-4-pack",
+   "brand": "Primos",
+   "category": "hunting-accessories",
+   "sub": "game-calls",
+   "price": 48.95,
+   "old_price": 69.99,
+   "rating": 4.9,
+   "reviews": 131,
+   "image": "assets/images/products/primos-elk-select-mouth-calls-4-pack.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 34,
+   "name": "Primos Hoochie Mama Elk Call",
+   "slug": "primos-hoochie-mama-elk-call",
+   "brand": "Primos",
+   "category": "hunting-accessories",
+   "sub": "game-calls",
+   "price": 49.99,
+   "old_price": null,
+   "rating": 4.6,
+   "reviews": 32,
+   "image": "assets/images/products/primos-hoochie-mama-elk-call.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 35,
+   "name": "Flambeau Circe Three-in-One Predator Call",
+   "slug": "flambeau-circe-three-in-one-predator-call",
+   "brand": "Flambeau",
+   "category": "hunting-accessories",
+   "sub": "game-calls",
+   "price": 22.95,
+   "old_price": null,
+   "rating": 4.8,
+   "reviews": 202,
+   "image": "assets/images/products/flambeau-circe-three-in-one-predator-call.jpg",
+   "is_new": 1
+  },
+  {
+   "id": 36,
+   "name": "Haydel's Magnum Honker Goose Call",
+   "slug": "haydel-s-magnum-honker-goose-call",
+   "brand": "Haydel",
+   "category": "hunting-accessories",
+   "sub": "game-calls",
+   "price": 34.95,
+   "old_price": null,
+   "rating": 4.3,
+   "reviews": 125,
+   "image": "assets/images/products/haydel-s-magnum-honker-goose-call.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 37,
+   "name": "Knight & Hale Ol' Yeller Box Turkey Call",
+   "slug": "knight-and-hale-ol-yeller-box-turkey-call",
+   "brand": "Knight & Hale",
+   "category": "hunting-accessories",
+   "sub": "game-calls",
+   "price": 79.99,
+   "old_price": null,
+   "rating": 4.4,
+   "reviews": 422,
+   "image": "assets/images/products/knight-and-hale-ol-yeller-box-turkey-call.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 38,
+   "name": "Spypoint Flex Plus Cellular Trail Camera",
+   "slug": "spypoint-flex-plus-cellular-trail-camera",
+   "brand": "Spypoint",
+   "category": "hunting-accessories",
+   "sub": "trail-cameras",
+   "price": 129.99,
+   "old_price": 149.99,
+   "rating": 4.3,
+   "reviews": 197,
+   "image": "assets/images/products/spypoint-flex-plus-cellular-trail-camera.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 39,
+   "name": "Moultrie Edge Pro 2 Cellular Trail Camera",
+   "slug": "moultrie-edge-pro-2-cellular-trail-camera",
+   "brand": "Moultrie",
+   "category": "hunting-accessories",
+   "sub": "trail-cameras",
+   "price": 119.99,
+   "old_price": null,
+   "rating": 4.9,
+   "reviews": 363,
+   "image": "assets/images/products/moultrie-edge-pro-2-cellular-trail-camera.jpg",
+   "is_new": 1
+  },
+  {
+   "id": 40,
+   "name": "Stealth Cam Revolver Pro 2.0 360 Cellular Camera",
+   "slug": "stealth-cam-revolver-pro-2-0-360-cellular-camera",
+   "brand": "Stealth Cam",
+   "category": "hunting-accessories",
+   "sub": "trail-cameras",
+   "price": 149.99,
+   "old_price": 159.99,
+   "rating": 4.3,
+   "reviews": 21,
+   "image": "assets/images/products/stealth-cam-revolver-pro-2-0-360-cellular-camera.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 41,
+   "name": "Butler Creek Flip-Open Objective Scope Cover 30mm",
+   "slug": "butler-creek-flip-open-objective-scope-cover-30mm",
+   "brand": "Butler Creek",
+   "category": "optics-and-sights",
+   "sub": "scope-mounts-and-accessories",
+   "price": 7.79,
+   "old_price": null,
+   "rating": 4.6,
+   "reviews": 424,
+   "image": "assets/images/products/butler-creek-flip-open-objective-scope-cover-30mm.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 42,
+   "name": "Simmons Pro Target Air Rifle Scope 3-9x40",
+   "slug": "simmons-pro-target-air-rifle-scope-3-9x40",
+   "brand": "Simmons",
+   "category": "optics-and-sights",
+   "sub": "scopes",
+   "price": 89.49,
+   "old_price": null,
+   "rating": 4.4,
+   "reviews": 86,
+   "image": "assets/images/products/simmons-pro-target-air-rifle-scope-3-9x40.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 43,
+   "name": "Simmons Pro Target Air Rifle Scope 2-7x32",
+   "slug": "simmons-pro-target-air-rifle-scope-2-7x32",
+   "brand": "Simmons",
+   "category": "optics-and-sights",
+   "sub": "scopes",
+   "price": 69.99,
+   "old_price": 79.49,
+   "rating": 4.2,
+   "reviews": 444,
+   "image": "assets/images/products/simmons-pro-target-air-rifle-scope-2-7x32.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 44,
+   "name": "BSA Air Rifle Scope 3-9x40 AO Mil-Dot",
+   "slug": "bsa-air-rifle-scope-3-9x40-ao-mil-dot",
+   "brand": "BSA",
+   "category": "optics-and-sights",
+   "sub": "scopes",
+   "price": 80.49,
+   "old_price": null,
+   "rating": 4.6,
+   "reviews": 104,
+   "image": "assets/images/products/bsa-air-rifle-scope-3-9x40-ao-mil-dot.jpg",
+   "is_new": 1
+  },
+  {
+   "id": 45,
+   "name": "Burris FastFire 3 Red Dot Sight 3 MOA",
+   "slug": "burris-fastfire-3-red-dot-sight-3-moa",
+   "brand": "Burris",
+   "category": "optics-and-sights",
+   "sub": "red-dot-sights",
+   "price": 139.99,
+   "old_price": 239.99,
+   "rating": 4.4,
+   "reviews": 126,
+   "image": "assets/images/products/burris-fastfire-3-red-dot-sight-3-moa.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 46,
+   "name": "Truglo Tru-Brite Dual Color Open Red Dot Sight",
+   "slug": "truglo-tru-brite-dual-color-open-red-dot-sight",
+   "brand": "Truglo",
+   "category": "optics-and-sights",
+   "sub": "red-dot-sights",
+   "price": 74.99,
+   "old_price": 83.99,
+   "rating": 4.2,
+   "reviews": 68,
+   "image": "assets/images/products/truglo-tru-brite-dual-color-open-red-dot-sight.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 47,
+   "name": "MTM Arrow Plus Case 36 Arrows",
+   "slug": "mtm-arrow-plus-case-36-arrows",
+   "brand": "MTM",
+   "category": "gun-cases-and-storage",
+   "sub": "bow-and-arrow-cases",
+   "price": 44.99,
+   "old_price": null,
+   "rating": 4.7,
+   "reviews": 57,
+   "image": "assets/images/products/mtm-arrow-plus-case-36-arrows.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 48,
+   "name": "Plano Bowmax Crossbow Case",
+   "slug": "plano-bowmax-crossbow-case",
+   "brand": "Plano",
+   "category": "gun-cases-and-storage",
+   "sub": "bow-and-arrow-cases",
+   "price": 119.99,
+   "old_price": null,
+   "rating": 4.3,
+   "reviews": 341,
+   "image": "assets/images/products/plano-bowmax-crossbow-case.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 49,
+   "name": "Forster Bench Rest Full Length Die Set .308 Win",
+   "slug": "forster-bench-rest-full-length-die-set-308-win",
+   "brand": "Forster",
+   "category": "reloading-equipment",
+   "sub": "reloading-equipment",
+   "price": 116.49,
+   "old_price": null,
+   "rating": 4.6,
+   "reviews": 336,
+   "image": "assets/images/products/forster-bench-rest-full-length-die-set-308-win.jpg",
+   "is_new": 0
+  },
+  {
+   "id": 50,
+   "name": "Lee Precision Quick Trim Rifle Die .223 Rem",
+   "slug": "lee-precision-quick-trim-rifle-die-223-rem",
+   "brand": "Lee",
+   "category": "reloading-equipment",
+   "sub": "reloading-equipment",
+   "price": 11.29,
+   "old_price": 13.49,
+   "rating": 4.7,
+   "reviews": 473,
+   "image": "assets/images/products/lee-precision-quick-trim-rifle-die-223-rem.jpg",
+   "is_new": 0
+  }
+ ]
+}

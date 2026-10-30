@@ -39,11 +39,24 @@ if (!product) {
   $('#pdpPrice').innerHTML = p.oldPrice
     ? `<strong class="is-sale">${money(p.price)}</strong><del>${money(p.oldPrice)}</del><span class="pdp-save">Save ${money(p.oldPrice - p.price)}</span>`
     : `<strong>${money(p.price)}</strong>`;
-  $('#pdpShip').textContent = p.price >= 75 ? 'Free shipping on this item' : `Free shipping on orders over $75`;
+  $('#pdpShip').textContent = p.price >= SITE.freeOver ? 'Free shipping on this item' : `Free shipping on orders over $${SITE.freeOver}`;
+
+  // ===== Stock (null = unknown, built-in catalog) =====
+  const maxQty = p.stock == null ? 99 : Math.min(99, p.stock);
+  const stockEl = $('.pdp-stock');
+  if (p.stock === 0) {
+    stockEl.classList.add('out');
+    stockEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Out of stock';
+    $('#pdpAdd').disabled = true;
+    $('#pdpAdd').textContent = 'Out of Stock';
+  } else if (p.stock != null && p.stock <= 3) {
+    stockEl.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Only ${p.stock} left in stock`;
+  }
 
   // ===== Quantity =====
   const qtyInput = $('#qtyInput');
-  const clampQty = () => { qtyInput.value = Math.min(99, Math.max(1, parseInt(qtyInput.value, 10) || 1)); };
+  qtyInput.max = Math.max(1, maxQty);
+  const clampQty = () => { qtyInput.value = Math.min(Math.max(1, maxQty), Math.max(1, parseInt(qtyInput.value, 10) || 1)); };
   $('#qtyMinus').addEventListener('click', () => { qtyInput.value = +qtyInput.value - 1; clampQty(); });
   $('#qtyPlus').addEventListener('click', () => { qtyInput.value = +qtyInput.value + 1; clampQty(); });
   qtyInput.addEventListener('change', clampQty);
@@ -86,7 +99,12 @@ if (!product) {
   renderWish();
 
   // ===== Tabs =====
-  $('#pdpDesc').innerHTML = `
+  // Admin-written description (plain text, blank line = new paragraph) comes first when there is one
+  const escapeHtml = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const written = p.description.trim()
+    ? p.description.trim().split(/\n\s*\n/).map(para => `<p>${escapeHtml(para).replace(/\n/g, '<br>')}</p>`).join('')
+    : '';
+  $('#pdpDesc').innerHTML = written || `
     <p>The <strong>${p.name}</strong> from ${brand} is part of our ${p.subName.toLowerCase()} lineup. ${ABOUT[p.category] || ''}</p>
     <ul>
       <li>Genuine ${brand} product, brand new in original packaging</li>
