@@ -29,7 +29,16 @@ $('#hotBuys').innerHTML = hotBuys.map(p => `
 if (!hotBuys.length) hideSection($('#hotBuys'));
 
 // ===== Hunting essentials grid =====
-const essentials = products.filter(p => p.category === 'hunting-accessories').slice(0, 8);
+// Field gear only (no detergents or sprays): one in-stock pick per section, priciest first, in turn
+const FIELD_GEAR = ['crossbows', 'broadheads', 'game-calls', 'fixed-blade-knives', 'bipods-and-tripods', 'blinds-and-seating',
+  'bow-releases', 'scopes', 'slings', 'shooting-rests-and-bags', 'red-dot-sights', 'arrows'];
+const NOT_FIELD_GEAR = /\b(case|electric|airsoft|submachine)\b/i;
+const gearBySub = FIELD_GEAR.map(sub => products.filter(p => p.sub === sub && p.stock !== 0 && !NOT_FIELD_GEAR.test(p.name))
+  .sort((a, b) => b.price - a.price));
+const essentials = [];
+for (let round = 0; essentials.length < 8 && gearBySub.some(list => list[round]); round++) {
+  gearBySub.forEach(list => { if (list[round] && essentials.length < 8) essentials.push(list[round]); });
+}
 $('#essentials').innerHTML = essentials.map(productCard).join('');
 if (!essentials.length) hideSection($('#essentials'));
 
