@@ -15,30 +15,43 @@ $('#catRow').innerHTML = categories.filter(c => c.count).slice(0, 6).map(c => {
   </a>`;
 }).join('');
 
-// ===== Hot Buys: biggest discounts first =====
-const hotBuys = products.filter(p => p.oldPrice).sort((a, b) => discount(b) - discount(a)).slice(0, 10);
+// Picks one in-stock item per section in turn (priciest first) until `limit` items are chosen
+const pickAcross = (subs, limit, skip = /$^/) => {
+  const bySub = subs.map(sub => products.filter(p => p.sub === sub && p.stock !== 0 && !skip.test(p.name)).sort((a, b) => b.price - a.price));
+  const picks = [];
+  for (let round = 0; picks.length < limit && bySub.some(list => list[round]); round++) {
+    bySub.forEach(list => { if (list[round] && picks.length < limit) picks.push(list[round]); });
+  }
+  return picks;
+};
+
+// ===== Hot Buys: biggest discounts first; featured knives, shooting and optics when nothing is on sale =====
+let hotBuys = products.filter(p => p.oldPrice).sort((a, b) => discount(b) - discount(a)).slice(0, 10);
+if (hotBuys.length < 4) {
+  // Guns lead the row (the store carries air rifles and pistols, no firearms), then knives, optics and shooting gear
+  const noToys = /\b(electric|airsoft)\b/i;
+  const guns = pickAcross(['air-rifles-and-pistols'], 6, noToys);
+  const gear = pickAcross(['folding-knives', 'red-dot-sights', 'shooting-rests-and-bags', 'multi-tools', 'handgun-sights',
+    'axes-and-hatchets', 'targets-and-accessories'], 6, noToys);
+  hotBuys = guns.flatMap((gun, i) => [gun, gear[i]]).filter(Boolean);
+  $('#hotBuysTitle').textContent = 'Featured Gear';
+  $('#hotBuysLink').textContent = 'Shop All';
+}
 $('#hotBuys').innerHTML = hotBuys.map(p => `
   <a href="${productLink(p)}" class="deal">
     <div class="deal-img">
-      <span class="deal-badge">-${discount(p)}%</span>
+      ${p.oldPrice ? `<span class="deal-badge">-${discount(p)}%</span>` : ''}
       ${imgWithFallback(p.img, p.name, p.icon)}
     </div>
     <p class="deal-name">${p.name}</p>
-    <p class="deal-price"><strong>${money(p.price)}</strong> <del>${money(p.oldPrice)}</del></p>
+    <p class="deal-price"><strong>${money(p.price)}</strong> ${p.oldPrice ? `<del>${money(p.oldPrice)}</del>` : ''}</p>
   </a>`).join('');
 if (!hotBuys.length) hideSection($('#hotBuys'));
 
 // ===== Hunting essentials grid =====
-// Field gear only (no detergents or sprays): one in-stock pick per section, priciest first, in turn
-const FIELD_GEAR = ['crossbows', 'broadheads', 'game-calls', 'fixed-blade-knives', 'bipods-and-tripods', 'blinds-and-seating',
-  'bow-releases', 'scopes', 'slings', 'shooting-rests-and-bags', 'red-dot-sights', 'arrows'];
-const NOT_FIELD_GEAR = /\b(case|electric|airsoft|submachine)\b/i;
-const gearBySub = FIELD_GEAR.map(sub => products.filter(p => p.sub === sub && p.stock !== 0 && !NOT_FIELD_GEAR.test(p.name))
-  .sort((a, b) => b.price - a.price));
-const essentials = [];
-for (let round = 0; essentials.length < 8 && gearBySub.some(list => list[round]); round++) {
-  gearBySub.forEach(list => { if (list[round] && essentials.length < 8) essentials.push(list[round]); });
-}
+// Field gear only (no detergents, sprays or cases)
+const essentials = pickAcross(['crossbows', 'broadheads', 'game-calls', 'fixed-blade-knives', 'bipods-and-tripods', 'blinds-and-seating',
+  'bow-releases', 'scopes', 'slings', 'shooting-rests-and-bags', 'red-dot-sights', 'arrows'], 8, /\b(case|electric|airsoft|submachine)\b/i);
 $('#essentials').innerHTML = essentials.map(productCard).join('');
 if (!essentials.length) hideSection($('#essentials'));
 
