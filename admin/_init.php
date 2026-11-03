@@ -11,8 +11,24 @@ header('Referrer-Policy: same-origin');
 // Columns added after the first release; databases created before them get them here.
 function migrate_db(): void
 {
-    if (!query("SHOW COLUMNS FROM products LIKE 'sku'")->fetch()) {
-        db()->exec("ALTER TABLE products ADD COLUMN sku VARCHAR(64) NOT NULL DEFAULT '' AFTER subcategory_id");
+    $added = [
+        'products' => [
+            'sku' => "VARCHAR(64) NOT NULL DEFAULT '' AFTER subcategory_id",
+            'weight' => 'DECIMAL(8,2) NULL AFTER stock',
+            'dimensions' => "VARCHAR(40) NOT NULL DEFAULT '' AFTER weight",
+        ],
+        'orders' => [
+            'shipping_service' => "VARCHAR(120) NOT NULL DEFAULT '' AFTER shipping",
+            'carrier' => "VARCHAR(60) NOT NULL DEFAULT '' AFTER status",
+            'tracking_url' => "VARCHAR(500) NOT NULL DEFAULT '' AFTER tracking_number",
+            'label_url' => "VARCHAR(500) NOT NULL DEFAULT '' AFTER tracking_url",
+        ],
+    ];
+    foreach ($added as $table => $columns) {
+        $have = query("SHOW COLUMNS FROM $table")->fetchAll(PDO::FETCH_COLUMN);
+        foreach ($columns as $name => $definition) {
+            if (!in_array($name, $have, true)) db()->exec("ALTER TABLE $table ADD COLUMN $name $definition");
+        }
     }
 }
 migrate_db();

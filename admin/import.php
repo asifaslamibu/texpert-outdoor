@@ -48,7 +48,7 @@ admin_header('Import Products', 'products');
   <?= csrf_field() ?>
   <h2>Upload a CSV file</h2>
   <p class="muted">Save your Excel sheet as <strong>CSV UTF-8</strong>. Required columns: <strong>Product Title</strong>, <strong>Price</strong> and <strong>Category</strong>.
-    Optional: SKU, Brand, Compare At, In Stock, Stock Qty, Published, Image, Short Description, URL.
+    Optional: SKU, Brand, Compare At, In Stock, Stock Qty, Published, Weight (lbs), Dimensions, Image, Short Description, URL.
     Categories that do not exist yet are created automatically. Products already in the store with the same title and image are updated (price, stock, category) instead of added twice.</p>
   <label>CSV file<input type="file" name="csv" accept=".csv,text/csv" required></label>
   <label class="check"><input type="checkbox" name="download_images" checked> Copy product images to this website</label>

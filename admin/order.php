@@ -1,10 +1,35 @@
 <?php
 require_once __DIR__ . '/_init.php';
+require_once __DIR__ . '/../includes/shippo.php';
 require_admin();
 
 $id = (int)($_GET['id'] ?? 0);
 $order = query('SELECT * FROM orders WHERE id = ?', [$id])->fetch();
 if (!$order) { flash('Order not found.', 'err'); redirect('orders.php'); }
+
+if (is_post() && ($_POST['action'] ?? '') === 'buy_label') {
+    check_csrf();
+    if (!shippo_enabled() || $order['delivery'] !== 'ship' || $order['label_url'] !== '' || $order['status'] === 'cancelled') {
+        flash('A label cannot be bought for this order.', 'err');
+        redirect('order.php?id=' . $id);
+    }
+    try {
+        $label = shippo_buy_label($order);
+    } catch (RuntimeException $e) {
+        flash($e->getMessage(), 'err');
+        redirect('order.php?id=' . $id);
+    }
+    query("UPDATE orders SET status = 'shipped', carrier = ?, tracking_number = ?, tracking_url = ?, label_url = ? WHERE id = ?",
+        [$label['carrier'], $label['tracking_number'], $label['tracking_url'], $label['label_url'], $id]);
+    if (isset($_POST['notify'])) {
+        notify($order['email'], "Order {$order['order_no']} has shipped",
+            "Hi {$order['first_name']},\n\nGood news: your order {$order['order_no']} is on its way with {$label['service']}.\n"
+            . "Tracking number: {$label['tracking_number']}\n" . ($label['tracking_url'] ? "Track it here: {$label['tracking_url']}\n" : '')
+            . "\nThank you,\nTexpert Outdoors\n+1-254-358-0017");
+    }
+    flash("Label bought: {$label['service']} for " . money($label['cost']) . '. Print it from the Shipping Label box.');
+    redirect('order.php?id=' . $id);
+}
 
 if (is_post()) {
     check_csrf();
@@ -28,6 +53,7 @@ if (is_post()) {
     if (isset($_POST['notify']) && $status !== $order['status']) {
         $msg = "Hi {$order['first_name']},\n\nYour order {$order['order_no']} is now: " . ORDER_STATUSES[$status] . '.';
         if ($status === 'shipped' && trim($_POST['tracking_number'] ?? '') !== '') $msg .= "\nTracking number: " . trim($_POST['tracking_number']);
+        if ($status === 'shipped' && $order['tracking_url'] !== '') $msg .= "\nTrack it here: " . $order['tracking_url'];
         if ($status === 'ready_for_pickup') $msg .= "\nPick it up at 2990 Congressman Ln, Dallas, TX 75220 (Mon–Fri, 9am–6pm). Please bring a photo ID.";
         notify($order['email'], "Order {$order['order_no']}: " . ORDER_STATUSES[$status], "$msg\n\nThank you,\nTexpert Outdoors\n+1-254-358-0017");
     }
@@ -81,6 +107,26 @@ admin_header('Order ' . $order['order_no'], 'orders');
       <h2><?= $order['delivery'] === 'pickup' ? 'Store Pickup' : 'Ship To' ?></h2>
       <p><?= $order['delivery'] === 'pickup' ? '2990 Congressman Ln, Dallas, TX 75220' : e($order['address']) . '<br>' . e("{$order['city']}, {$order['state']} {$order['zip']}") ?></p>
     </section>
+
+    <?php if ($order['delivery'] === 'ship'): ?>
+    <section class="card stack">
+      <h2>Shipping Label</h2>
+      <?php if ($order['shipping_service']): ?><p class="muted small">Customer chose <strong><?= e($order['shipping_service']) ?></strong> (<?= $order['shipping'] > 0 ? money($order['shipping']) : 'free' ?>).</p><?php endif; ?>
+      <?php if ($order['label_url']): ?>
+        <a href="<?= e($order['label_url']) ?>" target="_blank" rel="noopener" class="btn btn-block"><i class="fa-solid fa-print"></i> Print Label (PDF)</a>
+        <p class="small">Tracking: <?= $order['tracking_url'] ? '<a href="' . e($order['tracking_url']) . '" target="_blank" rel="noopener">' . e(trim($order['carrier'] . ' ' . $order['tracking_number'])) . '</a>' : e($order['tracking_number']) ?></p>
+      <?php elseif (!shippo_enabled()): ?>
+        <p class="muted small">Add a Shippo API key to <code>includes/config.php</code> to buy shipping labels here.</p>
+      <?php elseif ($order['status'] !== 'cancelled'): ?>
+        <form method="post" class="stack" onsubmit="return window.confirm('Buy a shipping label now? Your Shippo account is charged for it.')">
+          <?= csrf_field() ?><input type="hidden" name="action" value="buy_label">
+          <label class="check"><input type="checkbox" name="notify" checked> Email the tracking number to the customer</label>
+          <button class="btn btn-block"><i class="fa-solid fa-truck-fast"></i> Buy Shipping Label</button>
+          <p class="muted small">Uses the product weights and sizes, and marks the order as Shipped.</p>
+        </form>
+      <?php endif; ?>
+    </section>
+    <?php endif; ?>
 
     <form method="post" class="card stack">
       <?= csrf_field() ?>

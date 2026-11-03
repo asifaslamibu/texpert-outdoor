@@ -64,3 +64,17 @@ function throttle(string $key, int $max, int $seconds): void
     $hits[] = $now;
     $_SESSION['throttle'][$key] = $hits;
 }
+
+// Cart lines from a request as [product_id => qty], duplicates merged and quantities capped.
+function cart_input(array $in): array
+{
+    $cart = [];
+    foreach ((array)($in['items'] ?? []) as $line) {
+        $id = (int)($line['id'] ?? 0);
+        $qty = (int)($line['qty'] ?? 0);
+        if ($id > 0 && $qty > 0) $cart[$id] = min(99, ($cart[$id] ?? 0) + $qty);
+    }
+    if (!$cart) json_error('Your cart is empty.');
+    if (count($cart) > 50) json_error('Too many different items in one order.');
+    return $cart;
+}

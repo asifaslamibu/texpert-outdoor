@@ -6,7 +6,7 @@ $id = (int)($_GET['id'] ?? 0);
 $product = $id ? query('SELECT * FROM products WHERE id = ?', [$id])->fetch() : null;
 if ($id && !$product) { flash('Product not found.', 'err'); redirect('products.php'); }
 
-$defaults = ['name' => '', 'sku' => '', 'brand' => '', 'subcategory_id' => 0, 'description' => '', 'price' => '', 'old_price' => '', 'stock' => 10,
+$defaults = ['name' => '', 'sku' => '', 'brand' => '', 'subcategory_id' => 0, 'description' => '', 'price' => '', 'old_price' => '', 'stock' => 10, 'weight' => '', 'dimensions' => '',
              'rating' => 0, 'reviews' => 0, 'image' => '', 'is_new' => 0, 'is_active' => 1];
 $data = $product ?: $defaults;
 $errors = [];
@@ -38,6 +38,8 @@ if (is_post()) {
         'price' => trim($_POST['price'] ?? ''),
         'old_price' => trim($_POST['old_price'] ?? ''),
         'stock' => (int)($_POST['stock'] ?? 0),
+        'weight' => trim($_POST['weight'] ?? ''),
+        'dimensions' => mb_substr(trim($_POST['dimensions'] ?? ''), 0, 40),
         'rating' => min(5, max(0, round((float)($_POST['rating'] ?? 0), 1))),
         'reviews' => max(0, (int)($_POST['reviews'] ?? 0)),
         'image' => $product['image'] ?? '',
@@ -51,6 +53,10 @@ if (is_post()) {
         $errors[] = 'Compare-at (old) price must be higher than the price, or left empty.';
     }
     if ($data['stock'] < 0) $errors[] = 'Stock cannot be negative.';
+    if ($data['weight'] !== '' && (!is_numeric($data['weight']) || (float)$data['weight'] <= 0)) $errors[] = 'Weight must be a number of pounds above 0, or left empty.';
+    if ($data['dimensions'] !== '' && !preg_match('/^\d+(\.\d+)?\s*x\s*\d+(\.\d+)?\s*x\s*\d+(\.\d+)?$/i', $data['dimensions'])) {
+        $errors[] = 'Size must look like 12x8x3 (length x width x height in inches), or be left empty.';
+    }
 
     $uploaded = save_upload($_FILES['image'] ?? [], $errors);
     if (!$errors) {
@@ -58,14 +64,15 @@ if (is_post()) {
         if ($uploaded) $data['image'] = $uploaded;
         if (isset($_POST['remove_image']) && !$uploaded) $data['image'] = '';
         $values = [$data['subcategory_id'], $data['sku'], $data['name'], slugify($data['name']), $data['brand'], $data['description'] ?: null,
-                   (float)$data['price'], $data['old_price'] !== '' ? (float)$data['old_price'] : null, $data['stock'], $data['rating'],
+                   (float)$data['price'], $data['old_price'] !== '' ? (float)$data['old_price'] : null, $data['stock'],
+                   $data['weight'] !== '' ? (float)$data['weight'] : null, $data['dimensions'], $data['rating'],
                    $data['reviews'], $data['image'], $data['is_new'], $data['is_active']];
         if ($product) {
-            query('UPDATE products SET subcategory_id = ?, sku = ?, name = ?, slug = ?, brand = ?, description = ?, price = ?, old_price = ?, stock = ?,
+            query('UPDATE products SET subcategory_id = ?, sku = ?, name = ?, slug = ?, brand = ?, description = ?, price = ?, old_price = ?, stock = ?, weight = ?, dimensions = ?,
                    rating = ?, reviews = ?, image = ?, is_new = ?, is_active = ? WHERE id = ?', [...$values, $id]);
         } else {
-            query('INSERT INTO products (subcategory_id, sku, name, slug, brand, description, price, old_price, stock, rating, reviews, image, is_new, is_active)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $values);
+            query('INSERT INTO products (subcategory_id, sku, name, slug, brand, description, price, old_price, stock, weight, dimensions, rating, reviews, image, is_new, is_active)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $values);
             $id = (int)db()->lastInsertId();
         }
         // Remove a replaced upload (never the original stock images)
@@ -108,6 +115,10 @@ admin_header($product ? 'Edit Product' : 'Add Product', 'products');
       <label>Price ($)<input name="price" type="number" step="0.01" min="0" required value="<?= e($data['price']) ?>"></label>
       <label>Compare-at Price ($) <small>(for sales)</small><input name="old_price" type="number" step="0.01" min="0" value="<?= e($data['old_price']) ?>"></label>
       <label>Stock<input name="stock" type="number" min="0" required value="<?= e($data['stock']) ?>"></label>
+    </div>
+    <div class="row-2">
+      <label>Shipping Weight (lb)<input name="weight" type="number" step="0.01" min="0" value="<?= e($data['weight']) ?>"></label>
+      <label>Package Size (in) <small>(L x W x H, e.g. 12x8x3)</small><input name="dimensions" value="<?= e($data['dimensions']) ?>" placeholder="12x8x3"></label>
     </div>
     <div class="row-2">
       <label>Rating (0–5)<input name="rating" type="number" step="0.1" min="0" max="5" value="<?= e($data['rating']) ?>"></label>

@@ -97,6 +97,11 @@ function stripe_enabled(): bool
     return str_starts_with((string)config('stripe.secret_key', ''), 'sk_');
 }
 
+function shippo_enabled(): bool
+{
+    return str_starts_with((string)config('shippo.api_key', ''), 'shippo_');
+}
+
 // Best-effort notification email; failures never block the request.
 function notify(string $to, string $subject, string $body): void
 {

@@ -51,6 +51,7 @@ $payload = [
     'config' => [
         'api' => true,
         'stripe' => stripe_enabled(),
+        'shippo' => shippo_enabled(),
         'freeOver' => (float)config('shipping.free_over', 75),
         'flatRate' => (float)config('shipping.flat_rate', 9.95),
     ],

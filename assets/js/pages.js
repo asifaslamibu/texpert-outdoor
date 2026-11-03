@@ -38,9 +38,12 @@ function formError(form, message) {
   if (message) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-function summaryHtml(lines, pickup, withButton) {
+// `ship` is the chosen live rate's price when Shippo rates are on (null until one is chosen)
+function summaryHtml(lines, pickup, withButton, ship = null) {
   const subtotal = subtotalOf(lines);
-  const shipping = shippingFor(subtotal, pickup);
+  const live = SITE.shippo && !pickup;
+  const shipping = live ? ship : shippingFor(subtotal, pickup);
+  const shipText = shipping === null ? (withButton ? 'Calculated at checkout' : 'Enter your address') : (shipping ? money(shipping) : 'Free');
   const toFree = SITE.freeOver - subtotal;
   return `
     <h2>Order Summary</h2>
@@ -48,9 +51,9 @@ function summaryHtml(lines, pickup, withButton) {
       <li><span class="summary-thumb">${imgWithFallback(l.p.img, l.p.name, l.p.icon)}<em>${l.qty}</em></span><span>${l.p.name}</span><strong>${money(l.p.price * l.qty)}</strong></li>`).join('')}</ul>`}
     <dl>
       <dt>Subtotal</dt><dd>${money(subtotal)}</dd>
-      <dt>${pickup ? 'Store Pickup' : 'Shipping'}</dt><dd>${shipping ? money(shipping) : 'Free'}</dd>
+      <dt>${pickup ? 'Store Pickup' : 'Shipping'}</dt><dd>${shipText}</dd>
       <dt>Tax</dt><dd>Confirmed with you</dd>
-      <dt class="total">Estimated Total</dt><dd class="total">${money(subtotal + shipping)}</dd>
+      <dt class="total">Estimated Total</dt><dd class="total">${money(subtotal + (shipping || 0))}</dd>
     </dl>
     ${!pickup && toFree > 0 ? `<p class="free-ship">Add ${money(toFree)} more for free shipping.</p>` : ''}
     ${withButton ? '<a href="checkout.html" class="btn btn-primary btn-block">Checkout</a><a href="shop.html" class="continue">Continue Shopping</a>' : ''}`;
@@ -115,7 +118,46 @@ const checkoutForm = $('#checkoutForm');
 if (checkoutForm) {
   const isPickup = () => checkoutForm.delivery.value === 'pickup';
   const payByCard = () => SITE.stripe && checkoutForm.payment?.value === 'card';
-  const renderSummary = () => { $('#checkoutSummary').innerHTML = summaryHtml(cartLines(), isPickup(), false); };
+  let shipRate = null;   // chosen live rate {id, label, price}
+  let ratesById = {};
+  const renderSummary = () => { $('#checkoutSummary').innerHTML = summaryHtml(cartLines(), isPickup(), false, shipRate ? shipRate.price : null); };
+
+  // Live carrier rates (Shippo) once the address is complete; stale responses are ignored
+  let rateTimer;
+  let rateRequest = 0;
+  const loadRates = () => {
+    if (!SITE.api || !SITE.shippo || isPickup()) return;
+    const f = Object.fromEntries(new FormData(checkoutForm));
+    shipRate = null;
+    renderSummary();
+    const req = ++rateRequest;
+    if (['address', 'city', 'state'].some(k => !String(f[k] || '').trim()) || String(f.zip || '').replace(/\D/g, '').length < 5) {
+      $('#shipRates').hidden = true;
+      return;
+    }
+    $('#shipRates').hidden = false;
+    $('#shipRateList').innerHTML = '<p class="muted"><i class="fa-solid fa-spinner fa-spin"></i> Getting shipping rates...</p>';
+    apiCall('api/shipping-rates.php', { first: f.first, last: f.last, phone: f.phone, address: f.address, city: f.city, state: f.state, zip: f.zip, items: cart })
+      .then(({ rates }) => {
+        if (req !== rateRequest) return;
+        ratesById = Object.fromEntries(rates.map(r => [r.id, r]));
+        shipRate = rates[0] || null;
+        $('#shipRateList').innerHTML = rates.map((r, i) => `
+          <label class="choice rate"><input type="radio" name="rate" value="${esc(r.id)}" ${i === 0 ? 'checked' : ''}>
+            <span><strong>${esc(r.label)}</strong>${r.days ? `Estimated ${r.days} business day${r.days > 1 ? 's' : ''}` : 'Delivery time varies'}</span>
+            <b>${r.price ? money(r.price) : 'Free'}</b></label>`).join('');
+        renderSummary();
+      })
+      .catch(err => {
+        if (req === rateRequest) $('#shipRateList').innerHTML = `<p class="form-error">${esc(err.message)}</p>`;
+      });
+  };
+  checkoutForm.addEventListener('input', e => {
+    if (['address', 'city', 'state', 'zip'].includes(e.target.name)) {
+      clearTimeout(rateTimer);
+      rateTimer = setTimeout(loadRates, 800);
+    }
+  });
 
   const renderMode = () => {
     const btn = $('#checkoutForm button[type=submit]');
@@ -143,6 +185,7 @@ if (checkoutForm) {
         fill('email', c.email); fill('phone', c.phone); fill('first', c.first); fill('last', c.last);
         fill('pfirst', c.first); fill('plast', c.last); fill('address', c.address); fill('city', c.city); fill('state', c.state); fill('zip', c.zip);
         $('#accountHint').innerHTML = `Signed in as <strong>${esc(c.email)}</strong>. This order will appear in <a href="account.html">your account</a>.`;
+        loadRates();
       }).catch(() => {});
     }
 
@@ -154,6 +197,11 @@ if (checkoutForm) {
         $('#pickupFields').hidden = !pickup;
         $$('#shipFields input').forEach(i => { i.required = !pickup; });
         $$('#pickupFields input').forEach(i => { i.required = pickup; });
+        renderSummary();
+        loadRates();
+      }
+      if (e.target.name === 'rate') {
+        shipRate = ratesById[e.target.value] || null;
         renderSummary();
       }
       if (e.target.name === 'payment') renderMode();
@@ -172,10 +220,14 @@ if (checkoutForm) {
       };
 
       if (SITE.api) {
+        if (SITE.shippo && !pickup && !shipRate) {
+          formError(checkoutForm, 'Please choose a shipping method. Rates appear once your address is complete.');
+          return;
+        }
         const btn = $('#checkoutForm button[type=submit]');
         setBusy(btn, true, payByCard() ? 'Opening secure payment...' : 'Placing order...');
         try {
-          const res = await apiCall('api/checkout.php', { ...details, payment: payByCard() ? 'card' : 'later', items: cart });
+          const res = await apiCall('api/checkout.php', { ...details, payment: payByCard() ? 'card' : 'later', rate_id: shipRate?.id, items: cart });
           cart = [];
           save('outdoors_cart', cart);
           updateCounts();
@@ -183,6 +235,7 @@ if (checkoutForm) {
         } catch (err) {
           setBusy(btn, false);
           formError(checkoutForm, err.message);
+          if (/shipping again/.test(err.message)) loadRates();
         }
         return;
       }
@@ -354,7 +407,7 @@ if (trackForm) {
           <div class="track-head"><h2>Order ${esc(o.order_no)}</h2><span>Placed ${esc(o.date)}</span></div>
           ${o.status_key === 'cancelled' ? '<p class="form-error">This order was cancelled.</p>' : `
           <ol class="track-steps">${steps.map((s, i) => `<li class="${i <= at ? 'done' : ''}">${s.replace(/_/g, ' ')}</li>`).join('')}</ol>`}
-          <p><strong>Status:</strong> ${esc(o.status)} · <strong>Payment:</strong> ${esc(o.payment)}${o.tracking ? ` · <strong>Tracking:</strong> ${esc(o.tracking)}` : ''}</p>
+          <p><strong>Status:</strong> ${esc(o.status)} · <strong>Payment:</strong> ${esc(o.payment)}${o.tracking ? ` · <strong>Tracking:</strong> ${o.tracking_url ? `<a href="${esc(o.tracking_url)}" target="_blank" rel="noopener">${esc(o.carrier)} ${esc(o.tracking)}</a>` : esc(o.tracking)}` : ''}</p>
           <ul class="track-items">${o.items.map(i => `<li>${i.qty} × ${esc(i.name)}</li>`).join('')}</ul>
           <p><strong>Total:</strong> ${money(o.total)}</p>
         </div>`;

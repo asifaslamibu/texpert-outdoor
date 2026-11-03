@@ -20,6 +20,8 @@ json_out(['ok' => true, 'order' => [
     'payment' => $order['payment_status'],
     'delivery' => $order['delivery'],
     'tracking' => $order['tracking_number'],
+    'tracking_url' => $order['tracking_url'] ?? '',
+    'carrier' => $order['carrier'] ?? '',
     'total' => (float)$order['total'],
     'items' => array_map(fn($i) => ['name' => $i['name'], 'qty' => (int)$i['qty']], $items),
 ]]);

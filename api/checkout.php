@@ -4,6 +4,7 @@
 
 require_once __DIR__ . '/../includes/api.php';
 require_once __DIR__ . '/../includes/stripe.php';
+require_once __DIR__ . '/../includes/shippo.php';
 
 $in = json_input();
 throttle('checkout', 10, 600);
@@ -30,15 +31,30 @@ if (!$pickup && ($f['address'] === '' || $f['city'] === '' || $f['state'] === ''
 }
 if ($payment === 'card' && !stripe_enabled()) json_error('Card payments are not available right now. Choose "Pay Later".');
 
-// ----- Cart: merge duplicate lines, cap quantities -----
-$cart = [];
-foreach ((array)($in['items'] ?? []) as $line) {
-    $id = (int)($line['id'] ?? 0);
-    $qty = (int)($line['qty'] ?? 0);
-    if ($id > 0 && $qty > 0) $cart[$id] = min(99, ($cart[$id] ?? 0) + $qty);
+$cart = cart_input($in);
+
+// Prices the Shippo rate the customer picked again on the server, for this address and this cart.
+// Returns [price, service name].
+function checkout_shippo_rate(string $rateId, string $zip, array $cart, float $subtotal): array
+{
+    if (!preg_match('/^[a-f0-9]{32}$/', $rateId)) throw new DomainException('Please choose a shipping option.');
+    try {
+        $rate = shippo_request('GET', "rates/$rateId");
+        $shipment = shippo_request('GET', 'shipments/' . ($rate['shipment'] ?? ''));
+    } catch (RuntimeException $e) {
+        error_log('[texpert shippo] ' . $e->getMessage());
+        throw new DomainException('Your shipping option expired. Please choose shipping again.');
+    }
+    $zip5 = fn($z) => substr(preg_replace('/\D/', '', (string)$z), 0, 5);
+    $weight = (float)shippo_parcel(shippo_items($cart))['weight'];
+    if ($zip5($shipment['address_to']['zip'] ?? '') !== $zip5($zip) || abs((float)($shipment['parcels'][0]['weight'] ?? 0) - $weight) > 0.01) {
+        throw new DomainException('Your address or cart changed. Please choose shipping again.');
+    }
+    foreach (shippo_rates($shipment, $subtotal) as $r) {
+        if ($r['id'] === $rateId) return [$r['price'], $r['label']];
+    }
+    throw new DomainException('Your shipping option expired. Please choose shipping again.');
 }
-if (!$cart) json_error('Your cart is empty.');
-if (count($cart) > 50) json_error('Too many different items in one order.');
 
 $customer = current_customer();
 
@@ -63,6 +79,8 @@ try {
     }
     $subtotal = round($subtotal, 2);
     $shipping = shipping_for($subtotal, $pickup);
+    $service = $pickup ? '' : 'Standard Shipping';
+    if (!$pickup && shippo_enabled()) [$shipping, $service] = checkout_shippo_rate((string)($in['rate_id'] ?? ''), $f['zip'], $cart, $subtotal);
     $total = round($subtotal + $shipping, 2);
 
     do {
@@ -71,10 +89,10 @@ try {
     $token = bin2hex(random_bytes(16));
 
     query('INSERT INTO orders (order_no, token, customer_id, first_name, last_name, email, phone, delivery, address, city, state, zip, notes,
-                               subtotal, shipping, total, payment_method, payment_status)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                               subtotal, shipping, shipping_service, total, payment_method, payment_status)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [$orderNo, $token, $customer['id'] ?? null, $f['first_name'], $f['last_name'], $f['email'], $f['phone'], $pickup ? 'pickup' : 'ship',
-         $f['address'], $f['city'], $f['state'], $f['zip'], $f['notes'] ?: null, $subtotal, $shipping, $total,
+         $f['address'], $f['city'], $f['state'], $f['zip'], $f['notes'] ?: null, $subtotal, $shipping, $service, $total,
          $payment, $payment === 'card' ? 'pending' : 'unpaid']);
     $orderId = (int)db()->lastInsertId();
 
@@ -108,7 +126,7 @@ try {
 
 // ----- Notifications -----
 $lines = implode("\n", array_map(fn($i) => "{$i['qty']} x {$i['name']} @ " . money($i['price']), $items));
-$summary = "Order $orderNo\n\n$lines\n\nSubtotal: " . money($subtotal) . "\nShipping: " . ($shipping ? money($shipping) : 'Free')
+$summary = "Order $orderNo\n\n$lines\n\nSubtotal: " . money($subtotal) . "\nShipping" . ($service ? " ($service)" : '') . ': ' . ($shipping ? money($shipping) : 'Free')
     . "\nTotal: " . money($total) . "\n\n" . ($pickup ? 'Store pickup' : "Ship to: {$f['address']}, {$f['city']}, {$f['state']} {$f['zip']}");
 notify((string)config('notify_email', ''), "New order $orderNo (" . money($total) . ')',
     "$summary\n\nCustomer: {$f['first_name']} {$f['last_name']}, {$f['email']}, {$f['phone']}\nPayment: $payment\n\n"

@@ -41,6 +41,8 @@ const IMPORT_COLUMNS = [
     'in_stock' => ['instock', 'available'],
     'stock' => ['stockqty', 'stock', 'qty', 'quantity', 'inventory'],
     'published' => ['published', 'active', 'visible'],
+    'weight' => ['weightlbs', 'weightlb', 'weight', 'shippingweight'],
+    'dimensions' => ['dimensions', 'dims', 'packagesize', 'size'],
     'image' => ['image', 'imageurl', 'img', 'photo'],
     'description' => ['shortdescription', 'description', 'details'],
     'url' => ['url', 'producturl', 'link'],
@@ -205,6 +207,8 @@ function import_products_csv(string $csvFile, array $opts = []): array
             'price' => $price,
             'old_price' => $old !== null && $old > $price ? $old : null,
             'stock' => $stock,
+            'weight' => import_money($get('weight')) ?: null,
+            'dimensions' => preg_match('/^\d+(\.\d+)?\s*x\s*\d+(\.\d+)?\s*x\s*\d+(\.\d+)?$/i', $get('dimensions')) ? $get('dimensions') : '',
             'image' => $image,
             'is_active' => import_yes($get('published')) ? 1 : 0,
         ];

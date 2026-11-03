@@ -16,6 +16,12 @@ return [
         'currency'       => 'usd',
     ],
 
+    // Shippo API key from https://apps.goshippo.com/settings/api (shippo_test_... while testing).
+    // With a key, checkout shows live carrier rates and the admin can buy labels. Leave empty for the flat rate below.
+    'shippo' => [
+        'api_key' => '',
+    ],
+
     // Public site address without a trailing slash, e.g. https://www.texpertoutdoors.com
     // Leave empty to detect it from the request.
     'site_url' => '',
